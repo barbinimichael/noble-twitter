@@ -1,5 +1,4 @@
-const Twitter = require('twitter-lite');
-require('dotenv/config')
+import Twitter from 'twitter-lite';
 
 const apiKey = process.env.API_KEY
 const apiSecretKey = process.env.API_SECRET_KEY

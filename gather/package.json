@@ -1,0 +1,29 @@
+{
+  "name": "noble-twitter",
+  "version": "0.0.1",
+  "description": "no bull twitter",
+  "main": "index.js",
+  "type": "module",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "eslint": "^7.25.0",
+    "twitter-lite": "^1.1.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "node -r dotenv/config src/lib/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/barbinimichael/noble-twitter.git"
+  },
+  "keywords": [
+    "twitter"
+  ],
+  "author": "Michael Barbini",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/barbinimichael/noble-twitter/issues"
+  },
+  "homepage": "https://github.com/barbinimichael/noble-twitter#readme"
+}

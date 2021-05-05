@@ -1,0 +1,29 @@
+{
+  "name": "report-api",
+  "version": "0.0.1",
+  "description": "An API to serve noble twitter requests",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon src/lib/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/barbinimichael/noble-twitter.git"
+  },
+  "keywords": [
+    "twitter"
+  ],
+  "author": "Michael Barbini",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/barbinimichael/noble-twitter/issues"
+  },
+  "homepage": "https://github.com/barbinimichael/noble-twitter#readme",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "eslint": "^7.25.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.12.7",
+    "nodemon": "^2.0.7"
+  }
+}
