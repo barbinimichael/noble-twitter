@@ -3,9 +3,6 @@ import Twitter from 'twitter-lite';
 const apiKey = process.env.API_KEY
 const apiSecretKey = process.env.API_SECRET_KEY
 
-console.log(apiKey)
-console.log(apiSecretKey)
-
 const user = new Twitter({
   version: '2',
   extension: false,
