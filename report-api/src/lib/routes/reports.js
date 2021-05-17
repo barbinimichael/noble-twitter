@@ -1,21 +1,24 @@
 const express = require('express')
 const TwitterAccount = require('../schema/twitterAccount')
 const Report = require('../schema/report')
-const { ReportType, MediaType } = require('../../../../shared/enums')
+const { ReportType, Errors } = require('../../../../shared/enums')
 
 const router = express.Router()
 
 router.get('/', (req, res) => {
-  Report.find({}, (error, doc) => {
-    if (error) res.json({ message: error })
-    else res.json(doc)
-  })
+  TwitterAccount.find()
+    .then(doc => {
+      const reports = {}
+      doc.forEach(d => reports[d.accountName] = d.reports)
+      res.json(reports)
+    })
+    .catch(() => res.json({ error: Errors.SERVER_ERROR }))
 })
 
 const getReport = (req, res, type) => {
   const { accountName, date } = req.params
-  TwitterAccount.findOne({ accountName, date, type }, newReport, (error, doc) => {
-    if (error) res.json({ message: error })
+  TwitterAccount.findOne({ accountName, date, type }, (error, doc) => {
+    if (error) res.json({ error: Errors.NOT_FOUND })
     else res.json(doc)
   });
 }
@@ -34,7 +37,7 @@ router.post('/', (req, res) => {
   const twitterAccount = new TwitterAccount({ accountName, reports })
   twitterAccount.save()
     .then(data => res.json(data))
-    .catch(error => res.json({ message: error }))
+    .catch(() => res.json({ error: SERVER_ERROR }))
 })
 
 router.put('/:accountName', (req, res) => {
@@ -44,7 +47,7 @@ router.put('/:accountName', (req, res) => {
   const newReport = {}
   newReport[path] = report
   TwitterAccount.updateOne({ accountName: req.params.accountName }, newReport, (error, doc) => {
-    if (error) res.json({ message: error })
+    if (error) res.json({ error: NOT_FOUND })
     else res.json(doc)
   });
 })

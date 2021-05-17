@@ -6,7 +6,7 @@ const MediaLink = new mongoose.Schema({
   start: Number,
   end: Number,
   url: String,
-  type: { type: String, enum: Object.values(MediaType) }
+  type: { type: Number, enum: Object.values(MediaType) }
 });
 
 module.exports = mongoose.model('MediaLink', MediaLink);

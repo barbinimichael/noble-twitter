@@ -3,6 +3,8 @@ const cors = require('cors')
 const mongoose = require('mongoose')
 const bodyParser = require('body-parser')
 const reportsRouter = require('./routes/reports')
+const usersRouter = require('./routes/users')
+const authenticateToken = require('./middleWare/authenticateToken')
 require('dotenv/config')
 
 const corsOptions = {
@@ -16,7 +18,8 @@ mongoose.set('returnOriginal', false)
 const app = express()
 app.use(cors(corsOptions))
 app.use(bodyParser.json())
-app.use('/reports', reportsRouter)
+app.use('/reports', authenticateToken, reportsRouter)
+app.use('/users', usersRouter)
 
 app.get('/', (req, res) => {
   res.send('Noble Twitter API')
