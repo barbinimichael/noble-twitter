@@ -17,8 +17,8 @@ router.get('/', (req, res) => {
 
 const getReport = (req, res, type) => {
   const { accountName, date } = req.params
-  TwitterAccount.findOne({ accountName, date, type }, (error, doc) => {
-    if (error) res.json({ error: Errors.NOT_FOUND })
+  TwitterAccount.findOne({ accountName, [`reports.${date}.type`]: type }, (error, doc) => {
+    if (error || !doc) res.json({ error: Errors.NOT_FOUND })
     else res.json(doc)
   });
 }
@@ -43,10 +43,7 @@ router.post('/', (req, res) => {
 router.put('/:accountName', (req, res) => {
   const { date, type, tweets } = req
   const report = new Report({ date, type, tweets })
-  const path = 'reports.' + date
-  const newReport = {}
-  newReport[path] = report
-  TwitterAccount.updateOne({ accountName: req.params.accountName }, newReport, (error, doc) => {
+  TwitterAccount.updateOne({ accountName: req.params.accountName }, { [`reports.${date}`]: report }, (error, doc) => {
     if (error) res.json({ error: NOT_FOUND })
     else res.json(doc)
   });
