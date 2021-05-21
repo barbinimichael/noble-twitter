@@ -1,5 +1,5 @@
-const sponta = {
-  color: {
+export const light = {
+  colors: {
     primary: "#651FFF",
     onPrimary: "white",
     primaryCompliment: "#26C6DA",
@@ -14,28 +14,12 @@ const sponta = {
     onSurface: "black",
   },
   font: {
-    h1: {
-      size: "3rem"
-    },
-    mobileH1: {
-      size: "2.5rem"
-    },
-    h2: {
-      size: "2rem"
-    },
-    h3: {
-      size: "1.5rem"
-    },
-    h4: {
-      size: "1.17rem"
-    },
-    h5: {
-      size: "1rem"
-    },
-    body: {
-      size: "1.2rem"
-    },
+    h1: "3rem",
+    h2: "2rem",
+    h3: "1.5rem",
+    h4: "1.17rem",
+    h5: "1rem",
+    body: "1.4rem",
+    weight: "700"
   }
 }
-
-export default sponta;

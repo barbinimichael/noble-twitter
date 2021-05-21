@@ -1,0 +1,13 @@
+{
+  "title": "No Bull Twitter",
+  "header": {
+    "login": "Login",
+    "signUp": "Sign Up",
+    "logOut": "Log Out",
+    "account": "Account"
+  },
+  "landing": {
+    "title": "The bull free Twitter experience you always wanted",
+    "description": "Get daily reports compiled for the Twitter accounts you care about. All the tweets you want, none of the clutter. Customize reports to show chronological tweets, only the most popular tweets, and more. All of this in a fast and easy format to digest, right in your email inbox."
+  }
+}
