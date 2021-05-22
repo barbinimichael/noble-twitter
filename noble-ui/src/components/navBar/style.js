@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import { Navbar } from 'react-bootstrap'
-import Button from '../button/button'
+import A from '../a/a'
 
 export const StyledNavContainer = styled(Navbar)`
   position: sticky;
@@ -32,7 +32,7 @@ export const StyledButtonContainer = styled.div`
   margin-left: auto;
 `;
 
-export const StyledButton = styled(Button)`
+export const StyledButton = styled(A)`
   margin: 0 1rem;
 `;
 

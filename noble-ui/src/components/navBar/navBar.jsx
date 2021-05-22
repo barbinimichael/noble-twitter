@@ -36,7 +36,7 @@ const NavBar = ({ elements, className }) => {
 
   return (
     <StyledNavContainer expand='md' className={className}>
-      <StyledLogoContainer href="" >
+      <StyledLogoContainer href='' >
         <GiPolarBear />
         <StyledTitle ref={logoRef} show={!logoX} >
           {t('title')}
@@ -44,7 +44,7 @@ const NavBar = ({ elements, className }) => {
       </StyledLogoContainer>
       <StyledButtonContainer ref={buttonRef} show={!buttonX}>
         {elements.map((e, i) => (
-          <StyledButton key={i} onClick={e.onClick}>
+          <StyledButton key={i} href={e.link}>
             {t(e.titleKey)}
           </StyledButton>
         ))}
@@ -56,7 +56,7 @@ const NavBar = ({ elements, className }) => {
 NavBar.propTypes = {
   elements: PropTypes.arrayOf(PropTypes.shape({
     titleKey: PropTypes.string.isRequired,
-    onClick: PropTypes.func.isRequired
+    link: PropTypes.string.isRequired
   }))
 }
 

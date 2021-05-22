@@ -7,6 +7,7 @@ const User = new mongoose.Schema({
   lastName: String,
   email: String,
   phone: String,
+  googleId: String,
   password: String,
   plan: { type: Number, enum: Object.values(PlanType) }
 });

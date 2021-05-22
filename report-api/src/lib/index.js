@@ -2,10 +2,14 @@ const express = require('express');
 const cors = require('cors')
 const mongoose = require('mongoose')
 const bodyParser = require('body-parser')
+const cookieSession = require('cookie-session');
+const passport = require('passport');
 const reportsRouter = require('./routes/reports')
 const usersRouter = require('./routes/users')
 const authenticateToken = require('./middleWare/authenticateToken')
+const authRouter = require('./routes/auth')
 require('dotenv/config')
+require('./service/passport');
 
 const corsOptions = {
   origin: `http://localhost:${process.env.port || 3000}`,
@@ -17,9 +21,17 @@ mongoose.set('returnOriginal', false)
 
 const app = express()
 app.use(cors(corsOptions))
+app.use(cookieSession({
+  maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
+  keys: [process.env.JWT_SECRET_KEY],
+}));
+app.use(passport.initialize());
+app.use(passport.session());
 app.use(bodyParser.json())
+
 app.use('/reports', authenticateToken, reportsRouter)
 app.use('/users', usersRouter)
+app.use('/auth', authRouter)
 
 app.get('/', (req, res) => {
   res.send('Noble Twitter API')

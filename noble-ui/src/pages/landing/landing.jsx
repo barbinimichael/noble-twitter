@@ -8,8 +8,8 @@ const Landing = () => {
   const { t } = useTranslation()
 
   const navBarElements = [
-    { titleKey: 'header.login', onClick: () => { } },
-    { titleKey: 'header.signUp', onClick: () => { } }
+    { titleKey: 'header.login', link: '/login' },
+    { titleKey: 'header.signUp', link: '/signup' }
   ]
 
   return (
