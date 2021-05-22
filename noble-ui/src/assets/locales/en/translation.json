@@ -9,5 +9,13 @@
   "landing": {
     "title": "The bull free Twitter experience you always wanted",
     "description": "Get daily reports compiled for the Twitter accounts you care about. All the tweets you want, none of the clutter. Customize reports to show chronological tweets, only the most popular tweets, and more. All of this in a fast and easy format to digest, right in your email inbox."
+  },
+  "authentication": {
+    "signUp": "Sign Up for No Bull Twitter",
+    "signUpDescription": "Sign up using your Google account",
+    "login": "Login to No Bull Twitter",
+    "loginDescription": "Login using your Google account",
+    "alreadyHaveAccount": "Already have an account? Login here.",
+    "doNotHaveAccount": "Don't have an account? Sign up here."
   }
 }

@@ -12,9 +12,10 @@ require('dotenv/config')
 require('./service/passport');
 
 const corsOptions = {
-  origin: `http://localhost:${process.env.port || 3000}`,
+  origin: 'http://localhost:3001',
   optionsSuccessStatus: 200,
-  methods: 'GET, PUT, POST'
+  methods: 'GET, PUT, POST',
+  credentials: true
 }
 
 mongoose.set('returnOriginal', false)

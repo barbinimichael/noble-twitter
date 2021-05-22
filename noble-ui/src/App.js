@@ -5,6 +5,8 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import { light } from './assets/themes/globalTheme'
 import PrivateRoute from './components/privateRoute/privateRoute'
 import Landing from './pages/landing/landing'
+import SignUp from './pages/signUp/signUp'
+import Login from './pages/login/login'
 // import Profile from './pages/profile'
 // import Report from './pages/report'
 import { GlobalStyle } from './style'
@@ -16,9 +18,9 @@ const App = () => {
       <Router>
         <Switch>
           <Route exact path="/" component={Landing} />
-          {/* <Route path='/login' component={Login} />
-          <Route path='/signup' component={SignUp} />
-          <PrivateRoute path="/profile" component={Profile} />
+          <Route path='/login' component={Login} />
+          <Route path='/signUp' component={SignUp} />
+          {/* <PrivateRoute path="/profile" component={Profile} />
           <PrivateRoute path="/report" component={Report} /> */}
         </Switch>
       </Router>

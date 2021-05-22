@@ -36,7 +36,7 @@ const NavBar = ({ elements, className }) => {
 
   return (
     <StyledNavContainer expand='md' className={className}>
-      <StyledLogoContainer href='' >
+      <StyledLogoContainer href='/' >
         <GiPolarBear />
         <StyledTitle ref={logoRef} show={!logoX} >
           {t('title')}

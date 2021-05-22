@@ -9,7 +9,7 @@ const Landing = () => {
 
   const navBarElements = [
     { titleKey: 'header.login', link: '/login' },
-    { titleKey: 'header.signUp', link: '/signup' }
+    { titleKey: 'header.signUp', link: '/signUp' }
   ]
 
   return (

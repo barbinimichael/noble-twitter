@@ -4,11 +4,11 @@ import { FcGoogle } from 'react-icons/fc'
 import NavBar from '../../components/navBar/navBar'
 import { StyledContainer, StyledTitle, StyledText, StyledLink, StyledSignUpButton, StyledWrapper } from './style'
 
-const SignUp = () => {
+const Login = () => {
   const { t } = useTranslation()
   const elements = []
 
-  const handleSignUp = () => {
+  const handleLogin = () => {
     window.open("http://localhost:3000/auth/google", "_self")
   }
 
@@ -17,14 +17,14 @@ const SignUp = () => {
       <NavBar elements={elements} />
       <StyledContainer>
         <StyledWrapper>
-          <StyledTitle>{t('authentication.signUp')}</StyledTitle>
-          <StyledText>{t('authentication.signUpDescription')}</StyledText>
-          <StyledSignUpButton onClick={handleSignUp}><FcGoogle /></StyledSignUpButton>
+          <StyledTitle>{t('authentication.login')}</StyledTitle>
+          <StyledText>{t('authentication.loginDescription')}</StyledText>
+          <StyledSignUpButton onClick={handleLogin}><FcGoogle /></StyledSignUpButton>
         </StyledWrapper>
-        <StyledLink href='/login'>{t('authentication.alreadyHaveAccount')}</StyledLink>
+        <StyledLink href='/signUp'>{t('authentication.doNotHaveAccount')}</StyledLink>
       </StyledContainer>
     </>
   )
 }
 
-export default SignUp;
+export default Login;
