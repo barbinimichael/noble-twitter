@@ -1,57 +1,67 @@
 const express = require('express')
-const bcrypt = require('bcryptjs')
-const jwt = require('jsonwebtoken')
 const User = require('../schema/user')
-const { Errors } = require('../../../../shared/enums')
-require('dotenv/config')
+const { Errors } = require('../enums')
 
 const router = express.Router()
 
-router.post('/', async (req, res) => {
-  const { firstName, lastName, email, phone, password, plan } = req.body
-
-  await User.findOne({ email }, (error, doc) => {
-    if (doc || error) res.json({ error: Errors.EMAIL_EXISTS })
-  });
-
-  await User.findOne({ phone }, (error, doc) => {
-    if (doc || error) res.json({ error: Errors.PHONE_EXISTS })
-  });
-
-  const saltRounds = Math.round(Math.random() * 10 + 10)
-  bcrypt.hash(password, saltRounds, (error, hashedPassword) => {
-    if (error) res.json({ error: Errors.SERVER_ERROR })
-    const user = new User({
-      firstName, lastName, email, phone, password: hashedPassword, plan
-    })
-    user.save()
-      .then(() => res.json({ firstName, lastName, email, phone, plan }))
-      .catch(() => res.json({ error: Errors.SERVER_ERROR }))
-  })
+router.get('/following', (req, res) => {
+  res.json(req.user?.following || [])
 })
 
-// login with either phone or email
-router.post('/auth', (req, res) => {
-  const { username, password } = req.body
-  User.findOne().or([{ email: username }, { phone: username }])
-    .then(user => {
-      if (user) {
-        const { firstName, lastName, email, phone, plan } = user
-        bcrypt.compare(password, user.password, (error, result) => {
-          if (error) res.json({ error: Errors.INVALID_CREDENTIALS })
-          if (result) {
-            const token = jwt.sign({
-              firstName, lastName, email, phone, plan
-            }, process.env.JWT_SECRET_KEY, { expiresIn: '1h' })
-            res.json({ token })
-          }
-        })
+router.post('/following', (req, res) => {
+  const { following } = req.body
+  const googleId = req.user?.googleId
+  if (googleId) {
+    User.findOneAndUpdate(
+      { googleId },
+      { following },
+      { new: true },
+      (error, doc) => {
+        if (error) res.json({ error: Errors.NOT_FOUND })
+        else res.json(doc.following)
       }
-    })
-    .catch(() => {
-      console.log('could not find user', username)
-      res.json({ error: Errors.SERVER_ERROR })
-    })
+    )
+  }
+})
+
+router.put('/following', (req, res) => {
+  const { newFollowing } = req.body
+  const googleId = req.user?.googleId
+  if (googleId) {
+    User.findOneAndUpdate(
+      { googleId },
+      { "$push": { following: newFollowing } },
+      { new: true },
+      (error, doc) => {
+        console.log(doc)
+        if (error) res.json({ error: Errors.NOT_FOUND })
+        else res.json(doc.following)
+      }
+    )
+  }
+})
+
+router.get('/current_user', (req, res) => {
+  res.send(req.user);
+});
+
+router.get('/check/:accountName', (req, res) => {
+  const { accountName } = req.params
+  const parameters = {
+    usernames: accountName
+  };
+  (async () => {
+    global.twitterClient?.get(`users/by`, parameters)
+      .then(q => {
+        console.log(q)
+        if (q.errors) res.json({ error: Errors.NOT_FOUND })
+        else res.json({ user: accountName })
+      })
+      .catch(e => {
+        console.log(e)
+        res.json({ error: Errors.NOT_FOUND })
+      })
+  })()
 })
 
 module.exports = router;

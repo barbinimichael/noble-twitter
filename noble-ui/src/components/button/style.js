@@ -15,4 +15,9 @@ export const StyledButton = styled.button`
   :hover {
     transform: scale(1.05);
   }
+
+  :disabled {
+    opacity: 0.25;
+    transform: unset;
+  }
 `;

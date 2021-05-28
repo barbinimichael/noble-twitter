@@ -12,6 +12,7 @@ export const light = {
     onBackground: "#651FFF",
     surface: "#F5F5F5",
     onSurface: "black",
+    error: "red"
   },
   font: {
     h1: "3rem",

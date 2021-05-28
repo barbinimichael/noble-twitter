@@ -9,6 +9,7 @@ export const StyledNavContainer = styled(Navbar)`
   align-items: center;
   width: 100%;
   padding: 1rem 5rem;
+  background-color: ${props => props.theme.colors.onPrimary};
 `;
 
 export const StyledLogoContainer = styled.a`

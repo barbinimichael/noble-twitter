@@ -7,8 +7,7 @@ import PrivateRoute from './components/privateRoute/privateRoute'
 import Landing from './pages/landing/landing'
 import SignUp from './pages/signUp/signUp'
 import Login from './pages/login/login'
-// import Profile from './pages/profile'
-// import Report from './pages/report'
+import Profile from './pages/profile/profile'
 import { GlobalStyle } from './style'
 
 const App = () => {
@@ -17,11 +16,10 @@ const App = () => {
       <GlobalStyle />
       <Router>
         <Switch>
-          <Route exact path="/" component={Landing} />
+          <Route exact path='/' component={Landing} />
           <Route path='/login' component={Login} />
           <Route path='/signUp' component={SignUp} />
-          {/* <PrivateRoute path="/profile" component={Profile} />
-          <PrivateRoute path="/report" component={Report} /> */}
+          <PrivateRoute path='/profile' component={Profile} />
         </Switch>
       </Router>
     </ThemeProvider>

@@ -11,11 +11,22 @@
     "description": "Get daily reports compiled for the Twitter accounts you care about. All the tweets you want, none of the clutter. Customize reports to show chronological tweets, only the most popular tweets, and more. All of this in a fast and easy format to digest, right in your email inbox."
   },
   "authentication": {
-    "signUp": "Sign Up for No Bull Twitter",
+    "signUp": "Sign up for No Bull Twitter",
     "signUpDescription": "Sign up using your Google account",
+    "earlyAccess": "Sign up to get early access to the No Bull Twitter beta",
+    "earlyAccessThankYou": "Thank you for signing up! We'll email you when it's open!",
     "login": "Login to No Bull Twitter",
     "loginDescription": "Login using your Google account",
     "alreadyHaveAccount": "Already have an account? Login here.",
     "doNotHaveAccount": "Don't have an account? Sign up here."
+  },
+  "profile": {
+    "title": "Your Profile",
+    "followAccount": "Add a Twitter Account",
+    "follow": "Follow",
+    "inputPlaceholder": "Enter username...",
+    "following": "Subscribed Accounts",
+    "notFoundError": "Account does not exist",
+    "reachedLimit": "You have reached the limit for accounts you can subscribe to"
   }
 }

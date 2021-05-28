@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 const Tweet = require('./tweet').schema
-const { ReportType } = require('../../../../shared/enums')
+const { ReportType } = require('../enums')
 
 /** Represents a daily report compiled for a Twitter Account. */
 const Report = new mongoose.Schema({

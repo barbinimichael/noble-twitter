@@ -1,7 +1,7 @@
 const express = require('express')
 const TwitterAccount = require('../schema/twitterAccount')
 const Report = require('../schema/report')
-const { ReportType, Errors } = require('../../../../shared/enums')
+const { ReportType, Errors } = require('../enums')
 
 const router = express.Router()
 
@@ -37,14 +37,14 @@ router.post('/', (req, res) => {
   const twitterAccount = new TwitterAccount({ accountName, reports })
   twitterAccount.save()
     .then(data => res.json(data))
-    .catch(() => res.json({ error: SERVER_ERROR }))
+    .catch(() => res.json({ error: Errors.SERVER_ERROR }))
 })
 
 router.put('/:accountName', (req, res) => {
   const { date, type, tweets } = req
   const report = new Report({ date, type, tweets })
   TwitterAccount.updateOne({ accountName: req.params.accountName }, { [`reports.${date}`]: report }, (error, doc) => {
-    if (error) res.json({ error: NOT_FOUND })
+    if (error) res.json({ error: Errors.NOT_FOUND })
     else res.json(doc)
   });
 })

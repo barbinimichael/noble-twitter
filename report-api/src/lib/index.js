@@ -8,6 +8,7 @@ const reportsRouter = require('./routes/reports')
 const usersRouter = require('./routes/users')
 const authenticateToken = require('./middleWare/authenticateToken')
 const authRouter = require('./routes/auth')
+const twitter = require('twitter-lite');
 require('dotenv/config')
 require('./service/passport');
 
@@ -30,8 +31,31 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(bodyParser.json())
 
+const user = new twitter({
+  version: '2',
+  extension: false,
+  consumer_key: process.env.API_KEY,
+  consumer_secret: process.env.API_SECRET_KEY,
+});
+
+(async () => {
+  try {
+    // Retrieve the bearer token from twitter.
+    const response = await user.getBearerToken();
+
+    global.twitterClient = new twitter({
+      version: '2',
+      extension: false,
+      bearer_token: response.access_token
+    });
+    console.log('Connected to Twitter API.');
+  } catch (e) {
+    console.log('There was an error connecting to the Twitter API.', e);
+  }
+})();
+
 app.use('/reports', authenticateToken, reportsRouter)
-app.use('/users', usersRouter)
+app.use('/users', authenticateToken, usersRouter)
 app.use('/auth', authRouter)
 
 app.get('/', (req, res) => {
@@ -40,7 +64,7 @@ app.get('/', (req, res) => {
 
 mongoose.connect(
   process.env.MONGO_URL,
-  { useNewUrlParser: true, useUnifiedTopology: true },
+  { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false },
   (err) => {
     if (err) {
       console.log('Could not connect', err)

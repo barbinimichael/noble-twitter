@@ -9,7 +9,8 @@ const SignUp = () => {
   const elements = []
 
   const handleSignUp = () => {
-    window.open("http://localhost:3000/auth/google", "_self")
+    console.log('auth', process.env.REACT_APP_AUTH_URL)
+    window.open(process.env.REACT_APP_AUTH_URL, "_self")
   }
 
   return (
