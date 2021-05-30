@@ -4,7 +4,6 @@ const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const User = require('../schema/user')
 const { Errors } = require('../enums')
-require('dotenv/config')
 
 const router = express.Router()
 

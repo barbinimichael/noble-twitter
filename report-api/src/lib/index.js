@@ -9,11 +9,11 @@ const usersRouter = require('./routes/users')
 const authenticateToken = require('./middleWare/authenticateToken')
 const authRouter = require('./routes/auth')
 const twitter = require('twitter-lite');
-require('dotenv/config')
+require('dotenv').config()
 require('./service/passport');
 
 const corsOptions = {
-  origin: 'http://localhost:3001',
+  origin: process.env.CROSS_ORIGIN_URL,
   optionsSuccessStatus: 200,
   methods: 'GET, PUT, POST',
   credentials: true
@@ -74,5 +74,5 @@ mongoose.connect(
   }
 )
 
-const port = process.env.port || 3000
+const port = process.env.PORT || 8080
 app.listen(port, () => console.log('Listening on port', port))

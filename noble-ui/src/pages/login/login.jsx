@@ -9,7 +9,7 @@ const Login = () => {
   const elements = []
 
   const handleLogin = () => {
-    window.open(process.env.REACT_APP_AUTH_URL, "_self")
+    window.location = 'https://api.nobulltwitter.com//auth/google'
   }
 
   return (

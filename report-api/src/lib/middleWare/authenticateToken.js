@@ -1,6 +1,5 @@
 const jwt = require('jsonwebtoken')
 const { Errors } = require('../enums')
-require('dotenv/config')
 
 const authenticateToken = (req, res, next) => {
   if (req.isAuthenticated && req.isAuthenticated()) {

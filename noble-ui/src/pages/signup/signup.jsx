@@ -9,8 +9,7 @@ const SignUp = () => {
   const elements = []
 
   const handleSignUp = () => {
-    console.log('auth', process.env.REACT_APP_AUTH_URL)
-    window.open(process.env.REACT_APP_AUTH_URL, "_self")
+    window.location = 'https://api.nobulltwitter.com/auth/google'
   }
 
   return (

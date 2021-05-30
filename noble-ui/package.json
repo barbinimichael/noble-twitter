@@ -10,6 +10,9 @@
     "bootstrap": "^5.0.1",
     "dotenv": "^10.0.0",
     "eslint": "^7.26.0",
+    "firebase": "^8.6.3",
+    "firebase-admin": "^9.9.0",
+    "firebase-functions": "^3.14.1",
     "i18next": "^20.2.4",
     "lodash": "^4.17.21",
     "prop-types": "^15.7.2",
@@ -24,7 +27,7 @@
     "web-vitals": "^1.0.1"
   },
   "scripts": {
-    "start": "set PORT=3001 && react-scripts start",
+    "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
