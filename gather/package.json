@@ -3,15 +3,16 @@
   "version": "0.0.1",
   "description": "no bull twitter",
   "main": "index.js",
-  "type": "module",
   "dependencies": {
+    "axios": "^0.21.1",
     "dotenv": "^8.2.0",
     "eslint": "^7.25.0",
     "twitter-lite": "^1.1.0"
   },
   "devDependencies": {},
   "scripts": {
-    "start": "node -r dotenv/config src/lib/index.js"
+    "start": "node src/lib/index.js",
+    "test": "node src/doc/index.js"
   },
   "repository": {
     "type": "git",

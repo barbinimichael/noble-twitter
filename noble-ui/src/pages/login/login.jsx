@@ -9,7 +9,7 @@ const Login = () => {
   const elements = []
 
   const handleLogin = () => {
-    window.location = 'https://api.nobulltwitter.com//auth/google'
+    window.location = 'https://api.nobulltwitter.com/auth/google'
   }
 
   return (

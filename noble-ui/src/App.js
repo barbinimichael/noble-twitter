@@ -9,6 +9,7 @@ import SignUp from './pages/signUp/signUp'
 import Login from './pages/login/login'
 import Profile from './pages/profile/profile'
 import { GlobalStyle } from './style'
+import Report from './components/report/report'
 
 const App = () => {
   return (
@@ -19,6 +20,7 @@ const App = () => {
           <Route exact path='/' component={Landing} />
           <Route path='/login' component={Login} />
           <Route path='/signUp' component={SignUp} />
+          <Route path='/test' component={Report} />
           <PrivateRoute path='/profile' component={Profile} />
         </Switch>
       </Router>
