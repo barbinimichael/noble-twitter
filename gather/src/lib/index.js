@@ -97,9 +97,8 @@ const getThreads = async (client, tweetJSON, username, tweetID) => {
   const subThreadResults = await Promise.all(promises)
 
   subThreadResults?.forEach((q, i) => {
-    const subThreads = q?.data || [];
-    console.log(q?.data?.conversation_id, q?.data?.length)
-    json.data[i].subThreads = subThreads
+    console.log(q?.data?.length)
+    json.data[i].subThreads = q
   })
 
   console.log(JSON.stringify(json))

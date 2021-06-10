@@ -1,9 +1,9 @@
-const createReport = (request, accountName, date) => {
+const createReport = (request, accountName, date, isSubThread) => {
   const { data, includes, meta } = request || {}
 
   const tweetElements = data?.map(tweet => {
     let html = ''
-    const { entities, text, created_at, attachments } = tweet
+    const { entities, text, created_at, attachments, subThreads } = tweet
 
     let lastEnd = 0;
     const { urls, mentions } = entities || {}
@@ -58,11 +58,18 @@ const createReport = (request, accountName, date) => {
         isPM ? 'PM' : 'AM'
       )
 
+    const subElements = subThreads ? createReport(subThreads, accountName, date, true) : ''
     return (
-      `
-      <div class='tweet'>
-        <h3>${time}</h3>
+      isSubThread ? `
+      <div class='subThread'>
         ${html}
+      </div>
+      ` :
+        `
+      <div class='tweet'>
+        <h3>${time}${subThreads?.data?.length > 0 ? ' (Thread)' : ''}</h3>
+        ${html}
+        ${subElements}
       </div>
       `
     )
@@ -70,10 +77,11 @@ const createReport = (request, accountName, date) => {
 
   let concatTweets = ''
   tweetElements.forEach(t => concatTweets += t)
-  if (!concatTweets) concatTweets = 'No Tweets Today'
+  if (!(concatTweets || isSubThread)) concatTweets = 'No Tweets Today'
 
   return (
-    `
+    isSubThread ? concatTweets :
+      `
       <!DOCTYPE html>
       <html>
         <head>
@@ -102,6 +110,11 @@ const createReport = (request, accountName, date) => {
             }
             .tweet {
               margin: 1rem 0;
+            }
+            .subThread {
+              margin: 1rem 0 0 1rem;
+              border-left: 0.25rem solid black;
+              padding-left: 1rem;
             }
           </style>
         </head>
