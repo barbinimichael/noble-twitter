@@ -1,5 +1,6 @@
 const Twitter = require('twitter-lite');
 const axios = require('axios')
+const createReport = require('./createReport/createReport')
 require('dotenv').config()
 
 const api = axios.create({
@@ -51,28 +52,58 @@ const getTwitterJSON = async (client, username, date) => {
       'start_time': date,
       'tweet.fields': 'conversation_id,attachments,entities,created_at'
     };
-
-    client.get('tweets/search/recent', parameters)
-      .then(q => {
-        console.log('query', q)
-      })
+    return client.get('tweets/search/recent', parameters).then(q => {
+      return q
+    })
       .catch(e => {
-        console.log('query error', e)
+        console.log(e)
       })
   } catch (e) {
-    console.log("There was an error calling the Twitter API.");
+    console.log("There was an error calling the Twitter API when getting the main json.");
     console.dir(e);
   }
 }
 
-// create report from twitter json response
+const getThreads = async (client, tweetJSON, username, tweetID) => {
+  try {
+    const parameters = {
+      'query': `conversation_id:${tweetID} from:${username} to:${username}`,
+      'expansions': 'attachments.media_keys',
+      'media.fields': 'media_key,preview_image_url,public_metrics,url,type',
+      'tweet.fields': 'attachments,entities'
+    };
+    return client.get('tweets/search/recent', parameters)
+  } catch (e) {
+    console.log("There was an error calling the Twitter API when getting the threads.");
+    console.dir(e);
+  }
+}
 
 // run
 (async () => {
   const client = await getTwitterClient()
+  const username = 'elonmusk'
 
-  const date = getDate()
+  // const date = getDate()
+  const date = '2021-06-04T00:00:00.300Z'
   console.log(date)
 
-  getTwitterJSON(client, 'BarackObama', date)
+  const json = await getTwitterJSON(client, username, date);
+  const promises = (json?.data?.length > 0) ?
+    json.data.map(t =>
+      getThreads(client, t, username, t.conversation_id)
+    ) : []
+
+  const subThreadResults = await Promise.all(promises)
+
+  subThreadResults?.forEach((q, i) => {
+    const subThreads = q?.data || [];
+    console.log(q?.data?.conversation_id, q?.data?.length)
+    json.data[i].subThreads = subThreads
+  })
+
+  console.log(JSON.stringify(json))
+
+  const report = createReport(json, username, date)
+  console.log(report)
 })();
