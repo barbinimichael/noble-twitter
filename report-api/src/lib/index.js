@@ -12,8 +12,15 @@ const twitter = require('twitter-lite');
 require('dotenv').config()
 require('./service/passport');
 
-const corsOptions = {
-  origin: process.env.CROSS_ORIGIN_URL,
+var whitelist = [process.env.UI_ORIGIN_URL, process.env.GATHER_ORIGIN_URL]
+var corsOptions = {
+  origin: (origin, callback) => {
+    if (whitelist.indexOf(origin) !== -1 || !origin) {
+      callback(null, true)
+    } else {
+      callback(new Error('Not allowed by CORS'))
+    }
+  },
   optionsSuccessStatus: 200,
   methods: 'GET, PUT, POST',
   credentials: true

@@ -12,7 +12,8 @@ const User = new mongoose.Schema({
   password: String,
   locale: String,
   plan: { type: Number, enum: Object.values(PlanType) },
-  following: [String]
+  following: [String],
+  admin: Boolean
 });
 
 module.exports = mongoose.model('User', User);

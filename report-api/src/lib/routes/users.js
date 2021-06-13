@@ -64,4 +64,18 @@ router.get('/check/:accountName', (req, res) => {
   })()
 })
 
+router.get('/', (req, res) => {
+  User.find()
+    .then(doc => {
+      const users = doc.map(d => {
+        const { firstName, email, following } = d || {}
+        return {
+          firstName, email, following
+        }
+      })
+      res.json(users)
+    })
+    .catch(() => res.json({ error: Errors.SERVER_ERROR }))
+})
+
 module.exports = router;

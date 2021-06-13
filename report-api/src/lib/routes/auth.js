@@ -8,7 +8,7 @@ const { Errors } = require('../enums')
 const router = express.Router()
 
 router.post('/signUp', async (req, res) => {
-  const { firstName, lastName, email, phone, password, plan } = req.body
+  const { firstName, lastName, email, phone, password, plan, admin } = req.body
 
   await User.findOne({ email }, (error, doc) => {
     if (doc || error) res.json({ error: Errors.EMAIL_EXISTS })
@@ -22,10 +22,10 @@ router.post('/signUp', async (req, res) => {
   bcrypt.hash(password, saltRounds, (error, hashedPassword) => {
     if (error) res.json({ error: Errors.SERVER_ERROR })
     const user = new User({
-      firstName, lastName, email, phone, password: hashedPassword, plan
+      firstName, lastName, email, phone, password: hashedPassword, plan, admin
     })
     user.save()
-      .then(() => res.json({ firstName, lastName, email, phone, plan }))
+      .then(() => res.json({ firstName, lastName, email, phone, plan, admin }))
       .catch(() => res.json({ error: Errors.SERVER_ERROR }))
   })
 })

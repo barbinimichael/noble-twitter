@@ -11,7 +11,7 @@
   },
   "devDependencies": {},
   "scripts": {
-    "start": "node src/lib/index.js",
+    "start": "set PORT=3002 && node src/lib/index.js",
     "test": "node src/doc/index.js"
   },
   "repository": {

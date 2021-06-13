@@ -5,11 +5,32 @@ require('dotenv').config()
 
 const api = axios.create({
   withCredentials: true,
-  baseURL: 'https://api.nobulltwitter.com/',
+  baseURL: process.env.NOBULL_API_URL,
   headers: {
     "Content-Type": "application/json",
   },
 });
+
+const loginNobullAPI = async () => {
+  return api({
+    method: 'post',
+    url: `/auth`,
+    data: {
+      username: process.env.NOBULL_USERNAME,
+      password: process.env.NOBULL_PASSWORD
+    }
+  })
+}
+
+const getTwitterAccounts = async token => {
+  return api({
+    method: 'get',
+    url: `/users`,
+    headers: {
+      Authorization: token
+    }
+  })
+}
 
 const getTwitterClient = async () => {
   try {
@@ -17,8 +38,8 @@ const getTwitterClient = async () => {
     const user = new Twitter({
       version: '2',
       extension: false,
-      consumer_key: process.env.API_KEY,
-      consumer_secret: process.env.API_SECRET_KEY,
+      consumer_key: process.env.TWITTER_API_KEY,
+      consumer_secret: process.env.TWITTER_SECRET_KEY,
     });
 
     const response = await user.getBearerToken();
@@ -64,7 +85,7 @@ const getTwitterJSON = async (client, username, date) => {
   }
 }
 
-const getThreads = async (client, tweetJSON, username, tweetID) => {
+const getThreads = async (client, username, tweetID) => {
   try {
     const parameters = {
       'query': `conversation_id:${tweetID} from:${username} to:${username}`,
@@ -79,30 +100,41 @@ const getThreads = async (client, tweetJSON, username, tweetID) => {
   }
 }
 
-// run
+// create set from twitter accounts
+// for each twitter account, create report
+// for each user, select the correct reports, create briefing
+// send user their briefing
+
 (async () => {
-  const client = await getTwitterClient()
-  const username = 'elonmusk'
+  // get all users (email, twitter accounts) from database
+  const tokenResponse = await Promise.resolve(loginNobullAPI()).catch(e => console.log(e))
+  const token = 'Bearer ' + tokenResponse?.data?.token
+  console.log(token)
+  const users = await Promise.resolve(getTwitterAccounts(token)).catch(e => console.log(e))
+  console.log(users)
 
-  // const date = getDate()
-  const date = '2021-06-04T00:00:00.300Z'
-  console.log(date)
+  // const client = await getTwitterClient()
+  // const username = 'elonmusk'
 
-  const json = await getTwitterJSON(client, username, date);
-  const promises = (json?.data?.length > 0) ?
-    json.data.map(t =>
-      getThreads(client, t, username, t.conversation_id)
-    ) : []
+  // // const date = getDate()
+  // const date = '2021-06-04T00:00:00.300Z'
+  // console.log(date)
 
-  const subThreadResults = await Promise.all(promises)
+  // const json = await getTwitterJSON(client, username, date);
+  // const promises = (json?.data?.length > 0) ?
+  //   json.data.map(t =>
+  //     getThreads(client, username, t.conversation_id)
+  //   ) : []
 
-  subThreadResults?.forEach((q, i) => {
-    console.log(q?.data?.length)
-    json.data[i].subThreads = q
-  })
+  // const subThreadResults = await Promise.all(promises)
 
-  console.log(JSON.stringify(json))
+  // subThreadResults?.forEach((q, i) => {
+  //   console.log(q?.data?.length)
+  //   json.data[i].subThreads = q
+  // })
 
-  const report = createReport(json, username, date)
-  console.log(report)
+  // console.log(JSON.stringify(json))
+
+  // const report = createReport(json, username, date)
+  // console.log(report)
 })();
