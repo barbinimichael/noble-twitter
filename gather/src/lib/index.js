@@ -109,32 +109,38 @@ const getThreads = async (client, username, tweetID) => {
   // get all users (email, twitter accounts) from database
   const tokenResponse = await Promise.resolve(loginNobullAPI()).catch(e => console.log(e))
   const token = 'Bearer ' + tokenResponse?.data?.token
-  console.log(token)
-  const users = await Promise.resolve(getTwitterAccounts(token)).catch(e => console.log(e))
-  console.log(users)
 
-  // const client = await getTwitterClient()
-  // const username = 'elonmusk'
+  const usersResponse = await Promise.resolve(getTwitterAccounts(token)).catch(e => console.log(e))
+  const users = usersResponse?.data
+  const twitterAccounts = new Set();
+  users.forEach(u => {
+    u?.following?.forEach(f => twitterAccounts.add(f))
+  })
 
-  // // const date = getDate()
-  // const date = '2021-06-04T00:00:00.300Z'
-  // console.log(date)
+  const client = await getTwitterClient()
 
-  // const json = await getTwitterJSON(client, username, date);
-  // const promises = (json?.data?.length > 0) ?
-  //   json.data.map(t =>
-  //     getThreads(client, username, t.conversation_id)
-  //   ) : []
+  const reports = {}
+  twitterAccounts.forEach(t => {
+    const username = t
+    const date = getDate()
 
-  // const subThreadResults = await Promise.all(promises)
+    const json = await getTwitterJSON(client, username, date);
+    const promises = (json?.data?.length > 0) ?
+      json.data.map(t =>
+        getThreads(client, username, t.conversation_id)
+      ) : []
 
-  // subThreadResults?.forEach((q, i) => {
-  //   console.log(q?.data?.length)
-  //   json.data[i].subThreads = q
-  // })
+    const subThreadResults = await Promise.all(promises)
 
-  // console.log(JSON.stringify(json))
+    subThreadResults?.forEach((q, i) => {
+      console.log(q?.data?.length)
+      json.data[i].subThreads = q
+    })
 
-  // const report = createReport(json, username, date)
-  // console.log(report)
+    console.log(JSON.stringify(json))
+
+    const report = createReport(json, username, date)
+    reports[username] = report
+  })
+  console.log(reports)
 })();
