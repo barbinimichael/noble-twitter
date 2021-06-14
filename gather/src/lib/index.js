@@ -43,7 +43,6 @@ const getTwitterClient = async () => {
     });
 
     const response = await user.getBearerToken();
-    console.log(`Got the following Bearer token from Twitter: ${response.access_token}`);
 
     return new Twitter({
       version: '2',
@@ -60,6 +59,7 @@ const getTwitterClient = async () => {
 const getDate = () => {
   const currentDate = new Date();
   currentDate.setUTCHours(0, 0, 0, 0);
+  currentDate.setDate(currentDate.getDate() - 1);
   return currentDate.toISOString();
 }
 
@@ -74,6 +74,7 @@ const getTwitterJSON = async (client, username, date) => {
       'tweet.fields': 'conversation_id,attachments,entities,created_at'
     };
     return client.get('tweets/search/recent', parameters).then(q => {
+      console.log(q?.meta?.result_count)
       return q
     })
       .catch(e => {
@@ -100,12 +101,7 @@ const getThreads = async (client, username, tweetID) => {
   }
 }
 
-// create set from twitter accounts
-// for each twitter account, create report
-// for each user, select the correct reports, create briefing
-// send user their briefing
-
-(async () => {
+exports.handler = async (event, context) => {
   // get all users (email, twitter accounts) from database
   const tokenResponse = await Promise.resolve(loginNobullAPI()).catch(e => console.log(e))
   const token = 'Bearer ' + tokenResponse?.data?.token
@@ -116,13 +112,17 @@ const getThreads = async (client, username, tweetID) => {
   users.forEach(u => {
     u?.following?.forEach(f => twitterAccounts.add(f))
   })
+  console.log(twitterAccounts)
 
   const client = await getTwitterClient()
 
+  // create reports
   const reports = {}
-  twitterAccounts.forEach(t => {
+  const date = getDate()
+  console.log(date)
+
+  const reportPromises = Array.from(twitterAccounts).map(async t => {
     const username = t
-    const date = getDate()
 
     const json = await getTwitterJSON(client, username, date);
     const promises = (json?.data?.length > 0) ?
@@ -133,14 +133,23 @@ const getThreads = async (client, username, tweetID) => {
     const subThreadResults = await Promise.all(promises)
 
     subThreadResults?.forEach((q, i) => {
-      console.log(q?.data?.length)
       json.data[i].subThreads = q
     })
-
-    console.log(JSON.stringify(json))
 
     const report = createReport(json, username, date)
     reports[username] = report
   })
+  await Promise.all(reportPromises)
   console.log(reports)
-})();
+
+  // send users the reports they asked for
+  users.forEach(u => {
+    let briefing = ''
+    if (u?.following?.length > 0) {
+      u.following.forEach(f => {
+        briefing += reports[f];
+      })
+    }
+    // TODO send briefing
+  })
+};

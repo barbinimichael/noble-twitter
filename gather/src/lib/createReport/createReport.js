@@ -1,7 +1,9 @@
 const createReport = (request, accountName, date, isSubThread) => {
-  const { data, includes, meta } = request || {}
 
-  tweetElements.reverse()
+  const { data, includes, meta } = request || {}
+  if (!data || data?.length === 0) return;
+
+  data.reverse()
   const tweetElements = data?.map(tweet => {
     let html = ''
     const { entities, text, created_at, attachments, subThreads } = tweet
