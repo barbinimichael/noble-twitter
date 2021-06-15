@@ -1,6 +1,8 @@
 const Twitter = require('twitter-lite');
 const axios = require('axios')
 const createReport = require('./createReport/createReport')
+var aws = require("aws-sdk");
+var ses = new aws.SES({ region: "us-east-2" });
 require('dotenv').config()
 
 const api = axios.create({
@@ -143,13 +145,36 @@ exports.handler = async (event, context) => {
   console.log(reports)
 
   // send users the reports they asked for
-  users.forEach(u => {
+  const sendPromises = users.map(u => {
     let briefing = ''
     if (u?.following?.length > 0) {
       u.following.forEach(f => {
         briefing += reports[f];
       })
     }
-    // TODO send briefing
+    var params = {
+      Destination: {
+        ToAddresses: [
+          u.email,
+        ],
+      },
+      Message: {
+        Body: {
+          Html: {
+            Charset: "UTF-8",
+            Data: briefing
+          }
+        },
+        Subject: {
+          Charset: 'UTF-8',
+          Data: "Test Email"
+        },
+      },
+      Source: "NoBullBriefing@nobulltwitter.com",
+    };
+
+    console.log('sending email');
+    return ses.sendEmail(params).promise();
   })
+  return Promise.all(sendPromises);
 };
