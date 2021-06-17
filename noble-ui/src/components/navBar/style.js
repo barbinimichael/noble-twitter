@@ -1,14 +1,14 @@
 import styled from 'styled-components'
-import { Navbar } from 'react-bootstrap'
 import A from '../a/a'
 
-export const StyledNavContainer = styled(Navbar)`
+export const StyledNavContainer = styled.div`
   position: sticky;
+  top: 0;
   display: flex;
   flex-wrap: nowrap;
   align-items: center;
   width: 100%;
-  padding: 1rem 5rem;
+  padding: 1rem ${props => props.logoOnly ? '0.5rem' : '5rem'};
   background-color: ${props => props.theme.colors.onPrimary};
 `;
 

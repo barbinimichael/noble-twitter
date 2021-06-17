@@ -17,7 +17,6 @@ export const GlobalStyle = createGlobalStyle`
     width: 100%;
     padding: 0 0 0 0;
     margin: 0 0 0 0;
-    font-weight: 550;
     font-family: Muli;
   }
 `;

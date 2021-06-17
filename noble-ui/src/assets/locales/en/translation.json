@@ -7,8 +7,24 @@
     "account": "Account"
   },
   "landing": {
-    "title": "The bull free Twitter experience you always wanted",
-    "description": "Get daily reports compiled for the Twitter accounts you care about. All the tweets you want, none of the clutter. Customize reports to show chronological tweets, only the most popular tweets, and more. All of this in a fast and easy format to digest, right in your email inbox."
+    "title": "The Bull-Free Twitter experience you always wanted",
+    "subTitle": "A new way to Twitter",
+    "description": "Get a daily newsletter compiled from the Twitter accounts you care about most. Customize your report to show only the most popular Tweets in chronological order. All in a fast and easy format to digest, delivered straight to your inbox.",
+    "checkBoxes": {
+      "distractionFree": "Distraction Free",
+      "personalizedContent": "Personalized Content",
+      "allInOne": "All in One Account"
+    },
+    "steps": {
+      "create": "Create a free No Bull Twitter Account",
+      "follow": "Follow your favorite Twitter accounts",
+      "receive": "Receive curated content into your inbox"
+    },
+    "getStarted": {
+      "getStarted": "Get started today",
+      "createAnAccount": "Create an account",
+      "buyCoffee": "Buy us a coffee"
+    }
   },
   "authentication": {
     "signUp": "Sign up for No Bull Twitter",
