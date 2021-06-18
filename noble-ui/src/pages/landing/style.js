@@ -7,7 +7,7 @@ export const StyledBody = styled.div`
   display: flex;
   flex-flow: column;
   overflow-y: auto;
-  height: inherit;
+  height: 100%;
 `;
 
 export const StyledContainer = styled.div`
@@ -15,6 +15,7 @@ export const StyledContainer = styled.div`
   flex-flow: column;
   align-items: center;
   margin: ${props => props.isMobile ? '0' : '0 2.5rem'};
+  height: fit-content;
 `;
 
 export const StyledIntroContainer = styled.div`
@@ -23,6 +24,9 @@ export const StyledIntroContainer = styled.div`
   border-radius: ${props => props.isMobile ? 0 : 1}rem;
   background-color: ${props => props.theme.colors.secondary};
   padding: 1rem 0 0 1rem;
+  width: 100%;
+  height: fit-content;
+  flex: 1 0 auto;
 `;
 
 export const StyledTextContainer = styled.div`
@@ -45,6 +49,13 @@ export const StyledImage = styled.img`
   };
   margin: 0 auto;
   object-fit: fill;
+`;
+
+export const StyledIntroCreateButton = styled(A)`
+  color: ${props => props.theme.colors.onPrimary};
+  background: ${props => props.theme.colors.primary};
+  margin: 3rem 1rem ${props => props.isMobile ? 0 : 3}rem 1rem;
+  ${props => !props.isMobile && css`width: 50%;`};
 `;
 
 export const StyledCheckContainer = styled.div`
@@ -73,7 +84,10 @@ export const StyledSubTitleContainer = styled.div`
   display: flex;
   flex-flow: column;
   align-items: center;
-  margin: 2rem 1rem;
+  padding: 5rem 1rem;
+  width: 100%;
+  height: fit-content;
+  flex: 1 0 auto;
 `;
 
 export const StyledSubTitle = styled.h2`
@@ -90,31 +104,62 @@ export const StyledText = styled.div`
 `;
 
 export const StyledStepContainer = styled.div`
-  display: grid;
-  ${props => props.isMobile ? css`
-    grid-template-rows: repeat(3, 1fr);
-  ` : css`
-    grid-template-columns: repeat(3, 1fr);
-  `};
+  display: ${props => props.isMobile ? 'flex' : 'grid'};
+  flex-flow: column;
+  grid-template-columns: repeat(3, 1fr);
+  align-items: center;
+  justify-content: space-around;
+  width: 100%;
+  height: fit-content;
+  flex: 1 0 auto;
 `;
 
 export const StyledStepWrapper = styled.div`
   display: flex;
   flex-flow: column;
-  width: ${props => props.isMobile ? '80' : '30'}vw;
-  height: ${props => props.isMobile ? '80' : '30'}vw;
-  margin: 1rem;
-  padding: 3rem;
+  align-items: center;
+  margin-bottom: 1rem;
+  height: fit-content;
+  flex: 1 0 auto;
+`;
+
+export const StyledStepImageWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background-color: ${props => props.theme.colors.secondary};
   border-radius: 50%;
+  width: 15rem;
+  height: 15rem;
 `;
 
 export const StyledStepImage = styled.img`
-  width: 50%;
-  height: 50%;
+  width: 75%;
+  height: 75%;
   margin: auto;
-  object-fit: fill;
+  object-fit: contain;
 `;
+
+export const StyledStepTextWrapper = styled.div`
+  display: flex;
+  width: 100%;
+`;
+
+export const StyledStepNumber = styled(StyledText)`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 3rem;
+  height: 3rem;
+  border: 2px solid ${props => props.theme.colors.onSecondary};
+  border-radius: 50%;
+  flex: 2 0 auto;
+`;
+
+export const StyledStepText = styled(StyledText)`
+  text-align: unset;
+  padding-left: 0.25rem;
+`
 
 export const StyledStartContainer = styled.div`
   display: flex;
@@ -123,8 +168,10 @@ export const StyledStartContainer = styled.div`
   background-color: ${props => props.theme.colors.primary};
   width:100%;
   margin-top: 2rem;
-  padding-bottom: 2rem;
+  padding: 2rem;
   border-radius: ${props => props.isMobile ? 0 : 1}rem;
+  height: fit-content;
+  flex: 1 0 auto;
 `;
 
 export const StyledStartTitle = styled(StyledSubTitle)`

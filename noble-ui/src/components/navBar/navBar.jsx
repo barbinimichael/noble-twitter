@@ -2,14 +2,18 @@ import React, { useState, useEffect, useRef } from 'react'
 import PropTypes from 'prop-types'
 import { useTranslation } from 'react-i18next'
 import { GiPolarBear } from 'react-icons/gi'
+import { AiOutlineMenu } from 'react-icons/ai'
 import {
-  StyledNavContainer, StyledLogoContainer, StyledButtonContainer, StyledButton, StyledTitle
+  StyledNavContainer, StyledLogoContainer, StyledButtonContainer, StyledButton, StyledTitle,
+  StyledNavMenu, StyledMenu
 } from './style'
 
-const NavBar = ({ elements, className }) => {
+const NavBar = ({ elements, isMobile, className }) => {
   const [windowWidth, setWindowWidth] = useState()
   const [buttonX, setButtonX] = useState()
   const [logoX, setLogoX] = useState()
+  const [openMenu, setOpenMenu] = useState(false);
+
   const buttonRef = useRef()
   const logoRef = useRef()
   const { t } = useTranslation()
@@ -21,9 +25,14 @@ const NavBar = ({ elements, className }) => {
   }, []);
 
   useEffect(() => {
-    handleBound(buttonRef, buttonX, setButtonX)
-    handleBound(logoRef, logoX, setLogoX)
-  }, [windowWidth])
+    if (!isMobile) {
+      handleBound(buttonRef, buttonX, setButtonX)
+      handleBound(logoRef, logoX, setLogoX)
+    } else {
+      setButtonX(1000);
+      setLogoX(1000);
+    }
+  }, [windowWidth, isMobile])
 
   const handleBound = (ref, bound, setBound) => {
     const { x, width } = ref.current?.getBoundingClientRect() ?? {};
@@ -34,22 +43,34 @@ const NavBar = ({ elements, className }) => {
     }
   }
 
+  const buttonElements = elements.map((e, i) => (
+    <StyledButton key={i} href={e.link}>
+      {t(e.titleKey)}
+    </StyledButton>
+  ))
+
   return (
-    <StyledNavContainer expand='md' logoOnly={!logoX} className={className}>
-      <StyledLogoContainer href='/' >
-        <GiPolarBear />
-        <StyledTitle ref={logoRef} show={!logoX} >
-          {t('title')}
-        </StyledTitle>
-      </StyledLogoContainer>
-      <StyledButtonContainer ref={buttonRef} show={!buttonX}>
-        {elements.map((e, i) => (
-          <StyledButton key={i} href={e.link}>
-            {t(e.titleKey)}
-          </StyledButton>
-        ))}
-      </StyledButtonContainer>
-    </StyledNavContainer>
+    <>
+      <StyledNavContainer expand='md' logoOnly={logoX} className={className}>
+        <StyledLogoContainer href='/' >
+          <GiPolarBear />
+          <StyledTitle ref={logoRef} show={!logoX} >
+            {t('title')}
+          </StyledTitle>
+        </StyledLogoContainer>
+        <StyledButtonContainer ref={buttonRef} show={!buttonX}>
+          {buttonElements}
+        </StyledButtonContainer>
+        {(isMobile || buttonX) && (
+          <StyledNavMenu onClick={() => setOpenMenu(o => !o)}>
+            <AiOutlineMenu />
+          </StyledNavMenu>
+        )}
+      </StyledNavContainer>
+      <StyledMenu show={openMenu} isMobile={isMobile}>
+        {buttonElements}
+      </StyledMenu>
+    </>
   )
 }
 

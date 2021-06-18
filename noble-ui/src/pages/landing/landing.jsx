@@ -6,7 +6,8 @@ import {
   StyledBody, StyledContainer, StyledIntroContainer, StyledTextContainer, StyledTitle, StyledText, StyledImage,
   StyledCheckContainer, StyledCheckWrapper, StyledCheck, StyledSubTitleContainer, StyledSubTitle, StyledStepContainer,
   StyledStepWrapper, StyledStepImage, StyledStartContainer, StyledStartButtonContainer, StyledCreateButton,
-  StyledCoffeeButton, StyledStartTitle
+  StyledCoffeeButton, StyledStartTitle, StyledStepImageWrapper, StyledStepText, StyledStepNumber, StyledStepTextWrapper,
+  StyledIntroCreateButton
 } from './style'
 import desktopIcon from '../../assets/icons/desktop.svg'
 import createIcon from '../../assets/icons/create.svg'
@@ -28,7 +29,7 @@ const Landing = () => {
   ]
 
   const checkElements = checks.map(c => (
-    <StyledCheckWrapper>
+    <StyledCheckWrapper key={c.key}>
       <StyledCheck />
       {t(c.key)}
     </StyledCheckWrapper>
@@ -40,16 +41,21 @@ const Landing = () => {
     { key: 'landing.steps.receive', icon: receiveIcon }
   ]
 
-  const stepElements = steps.map(s => (
-    <StyledStepWrapper isMobile={isMobile}>
-      <StyledStepImage src={s.icon} alt='' />
-      <StyledText>{t(s.key)}</StyledText>
+  const stepElements = steps.map((s, i) => (
+    <StyledStepWrapper key={s.key} isMobile={isMobile}>
+      <StyledStepImageWrapper>
+        <StyledStepImage src={s.icon} alt='' isMobile={isMobile} />
+      </StyledStepImageWrapper>
+      <StyledStepTextWrapper isMobile={isMobile}>
+        <StyledStepNumber>{i + 1}</StyledStepNumber>
+        <StyledStepText>{t(s.key)}</StyledStepText>
+      </StyledStepTextWrapper>
     </StyledStepWrapper>
   ))
 
   return (
     <StyledBody>
-      <NavBar elements={navBarElements} />
+      <NavBar elements={navBarElements} isMobile={isMobile} />
       <StyledContainer isMobile={isMobile}>
         <StyledIntroContainer isMobile={isMobile}>
           <StyledTextContainer>
@@ -59,6 +65,9 @@ const Landing = () => {
             <StyledCheckContainer isMobile={isMobile}>
               {checkElements}
             </StyledCheckContainer>
+            <StyledIntroCreateButton href='/signUp' isMobile={isMobile}>
+              {t('landing.getStarted.createAnAccount')}
+            </StyledIntroCreateButton>
           </StyledTextContainer>
           <StyledImage src={desktopIcon} alt='' isMobile={isMobile} />
         </StyledIntroContainer>
