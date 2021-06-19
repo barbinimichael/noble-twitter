@@ -9,9 +9,11 @@ export const StyledNavContainer = styled.div`
   flex-wrap: nowrap;
   align-items: center;
   width: 100%;
-  padding: 1rem 0.5rem;
   background-color: ${props => props.theme.colors.onPrimary};
-  height: 5rem;
+
+  @media screen and (min-width: ${props => props.theme.breakpoints.md}) {
+    padding: 1rem 0.5rem;
+  }
 `;
 
 export const StyledLogoContainer = styled.a`
@@ -44,6 +46,7 @@ export const StyledTitle = styled.div`
   font-size: ${props => props.theme.font.body};
   margin-left: 1rem;
   color: ${props => props.theme.colors.primary};
+  white-space: nowrap;
 `;
 
 export const StyledNavMenu = styled(Button)`
@@ -58,7 +61,7 @@ export const StyledMenu = styled.div`
   display: flex;
   flex-flow: column;
   position: absolute;
-  top: 5rem;
+  top: ${props => `${props.top}px` || '5rem'};
   right: 0;
   width: 100%;
   height: ${props => props.show ? '100%' : '0%'};

@@ -1,4 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react'
+import { useTheme } from 'styled-components'
+import { useMediaQuery } from 'react-responsive'
 import PropTypes from 'prop-types'
 import { useTranslation } from 'react-i18next'
 import { GiPolarBear } from 'react-icons/gi'
@@ -14,9 +16,13 @@ const NavBar = ({ elements, className }) => {
   const [logoX, setLogoX] = useState()
   const [openMenu, setOpenMenu] = useState(false);
 
+  const navRef = useRef();
   const buttonRef = useRef()
   const logoRef = useRef()
   const { t } = useTranslation()
+  const theme = useTheme()
+
+  const landscapeMobile = useMediaQuery({ query: `(min-device-width: ${theme.breakpoints.sm})` });
 
   useEffect(() => {
     const handleResize = () => setWindowWidth(window.innerWidth)
@@ -25,8 +31,13 @@ const NavBar = ({ elements, className }) => {
   }, []);
 
   useEffect(() => {
-    handleBound(buttonRef, buttonX, setButtonX)
-    handleBound(logoRef, logoX, setLogoX)
+    if (landscapeMobile) {
+      handleBound(buttonRef, buttonX, setButtonX)
+      handleBound(logoRef, logoX, setLogoX)
+    } else {
+      setButtonX(1)
+    }
+
   }, [windowWidth])
 
   const handleBound = (ref, bound, setBound) => {
@@ -44,9 +55,12 @@ const NavBar = ({ elements, className }) => {
     </StyledButton>
   ))
 
+  const navDims = navRef.current?.getBoundingClientRect()
+  const menuTop = navDims?.height + navDims?.y;
+
   return (
     <>
-      <StyledNavContainer expand='md' logoOnly={logoX} className={className}>
+      <StyledNavContainer ref={navRef} expand='md' logoOnly={logoX} className={className}>
         <StyledLogoContainer href='/' >
           <GiPolarBear />
           <StyledTitle ref={logoRef} show={!logoX} >
@@ -62,7 +76,7 @@ const NavBar = ({ elements, className }) => {
           </StyledNavMenu>
         )}
       </StyledNavContainer>
-      <StyledMenu show={openMenu}>
+      <StyledMenu top={menuTop} show={openMenu}>
         {buttonElements}
       </StyledMenu>
     </>

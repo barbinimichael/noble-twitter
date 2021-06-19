@@ -18,5 +18,7 @@ export const GlobalStyle = createGlobalStyle`
     padding: 0 0 0 0;
     margin: 0 0 0 0;
     font-family: Muli;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 `;
