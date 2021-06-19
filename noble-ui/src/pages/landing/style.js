@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 import { CgCheckO } from 'react-icons/cg'
 import A from '../../components/a/a'
 import Button from '../../components/button/button'
@@ -14,19 +14,29 @@ export const StyledContainer = styled.div`
   display: flex;
   flex-flow: column;
   align-items: center;
-  margin: ${props => props.isMobile ? '0' : '0 2.5rem'};
   height: fit-content;
+
+  @media screen and (min-width: ${props => props.theme.breakpoints.sm}) {
+    margin: 0 2.5rem;
+  }
 `;
 
 export const StyledIntroContainer = styled.div`
   display: grid;
-  grid-template-columns: 1fr ${props => !props.isMobile && '1fr'};
-  border-radius: ${props => props.isMobile ? 0 : 1}rem;
+  grid-template-columns: 1fr;
   background-color: ${props => props.theme.colors.secondary};
-  padding: 1rem 0 0 1rem;
+  padding: 1rem 0 1rem 1rem;
   width: 100%;
   height: fit-content;
   flex: 1 0 auto;
+
+  @media screen and (min-width: ${props => props.theme.breakpoints.sm}) {
+    border-radius: 1rem;
+  }
+
+  @media screen and (min-width: ${props => props.theme.breakpoints.md}) {
+    grid-template-columns: 1fr 1fr;
+  }
 `;
 
 export const StyledTextContainer = styled.div`
@@ -40,22 +50,26 @@ export const StyledTitle = styled.h1`
 `;
 
 export const StyledImage = styled.img`
-  ${props => props.isMobile ? css`
-    width: 80vw;
-    height: 80vw;
-  ` : css`
-    width: 100%;
-    height: 100%;`
-  };
-  margin: 0 auto;
-  object-fit: fill;
+  display: none;
+
+  @media screen and (min-width: ${props => props.theme.breakpoints.md}) {
+    display: block;
+    width: 25rem;
+    height: 25rem;
+    margin: 0 auto;
+    object-fit: fill;
+  }
 `;
 
 export const StyledIntroCreateButton = styled(A)`
   color: ${props => props.theme.colors.onPrimary};
   background: ${props => props.theme.colors.primary};
-  margin: 3rem 1rem ${props => props.isMobile ? 0 : 3}rem 1rem;
-  ${props => !props.isMobile && css`width: 50%;`};
+  margin: 3rem 1rem 0rem 0rem;
+
+  @media screen and (min-width: ${props => props.theme.breakpoints.md}) {
+    margin: 3rem 1rem 3rem 0rem;
+    width: 50%;
+  }
 `;
 
 export const StyledCheckContainer = styled.div`
@@ -84,16 +98,24 @@ export const StyledSubTitleContainer = styled.div`
   display: flex;
   flex-flow: column;
   align-items: center;
-  padding: 5rem 1rem;
+  padding: 2.5rem 1rem;
   width: 100%;
   height: fit-content;
   flex: 1 0 auto;
+
+  @media screen and (min-width: ${props => props.theme.breakpoints.md}) {
+    padding: 5rem 1rem;
+  }
 `;
 
 export const StyledSubTitle = styled.h2`
-  font-size: ${props => props.isMobile ? props.theme.font.h2 : props.theme.font.h1};
+  font-size: ${props => props.theme.font.h2};
   color: ${props => props.theme.colors.onSecondary};
   text-align: center;
+
+  @media screen and (min-width: ${props => props.theme.breakpoints.sm}) {
+    font-size: ${props => props.theme.font.h1};
+  }
 `;
 
 export const StyledText = styled.div`
@@ -104,14 +126,18 @@ export const StyledText = styled.div`
 `;
 
 export const StyledStepContainer = styled.div`
-  display: ${props => props.isMobile ? 'flex' : 'grid'};
+  display: flex;
   flex-flow: column;
-  grid-template-columns: repeat(3, 1fr);
   align-items: center;
   justify-content: space-around;
   width: 100%;
   height: fit-content;
   flex: 1 0 auto;
+
+  @media screen and (min-width: ${props => props.theme.breakpoints.md}) {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+  }
 `;
 
 export const StyledStepWrapper = styled.div`
@@ -121,6 +147,7 @@ export const StyledStepWrapper = styled.div`
   margin-bottom: 1rem;
   height: fit-content;
   flex: 1 0 auto;
+  margin-left: 0.25rem;
 `;
 
 export const StyledStepImageWrapper = styled.div`
@@ -142,7 +169,7 @@ export const StyledStepImage = styled.img`
 
 export const StyledStepTextWrapper = styled.div`
   display: flex;
-  width: 100%;
+  align-items: center;
 `;
 
 export const StyledStepNumber = styled(StyledText)`
@@ -153,7 +180,7 @@ export const StyledStepNumber = styled(StyledText)`
   height: 3rem;
   border: 2px solid ${props => props.theme.colors.onSecondary};
   border-radius: 50%;
-  flex: 2 0 auto;
+  flex: 1 0 auto;
 `;
 
 export const StyledStepText = styled(StyledText)`
@@ -169,9 +196,12 @@ export const StyledStartContainer = styled.div`
   width:100%;
   margin-top: 2rem;
   padding: 2rem;
-  border-radius: ${props => props.isMobile ? 0 : 1}rem;
   height: fit-content;
   flex: 1 0 auto;
+
+  @media screen and (min-width: ${props => props.theme.breakpoints.sm}) {
+    border-radius: 1rem;
+  }
 `;
 
 export const StyledStartTitle = styled(StyledSubTitle)`
@@ -181,7 +211,11 @@ export const StyledStartTitle = styled(StyledSubTitle)`
 
 export const StyledStartButtonContainer = styled.div`
   display: flex;
-  flex-flow: ${props => props.isMobile ? 'column' : 'row'};
+  flex-flow: column;
+
+  @media screen and (min-width: ${props => props.theme.breakpoints.sm}) {
+    flex-flow: row;
+  }
 `;
 
 export const StyledCreateButton = styled(A)`

@@ -8,7 +8,7 @@ import {
   StyledNavMenu, StyledMenu
 } from './style'
 
-const NavBar = ({ elements, isMobile, className }) => {
+const NavBar = ({ elements, className }) => {
   const [windowWidth, setWindowWidth] = useState()
   const [buttonX, setButtonX] = useState()
   const [logoX, setLogoX] = useState()
@@ -25,14 +25,9 @@ const NavBar = ({ elements, isMobile, className }) => {
   }, []);
 
   useEffect(() => {
-    if (!isMobile) {
-      handleBound(buttonRef, buttonX, setButtonX)
-      handleBound(logoRef, logoX, setLogoX)
-    } else {
-      setButtonX(1000);
-      setLogoX(1000);
-    }
-  }, [windowWidth, isMobile])
+    handleBound(buttonRef, buttonX, setButtonX)
+    handleBound(logoRef, logoX, setLogoX)
+  }, [windowWidth])
 
   const handleBound = (ref, bound, setBound) => {
     const { x, width } = ref.current?.getBoundingClientRect() ?? {};
@@ -61,13 +56,13 @@ const NavBar = ({ elements, isMobile, className }) => {
         <StyledButtonContainer ref={buttonRef} show={!buttonX}>
           {buttonElements}
         </StyledButtonContainer>
-        {(isMobile || buttonX) && (
+        {buttonX && (
           <StyledNavMenu onClick={() => setOpenMenu(o => !o)}>
             <AiOutlineMenu />
           </StyledNavMenu>
         )}
       </StyledNavContainer>
-      <StyledMenu show={openMenu} isMobile={isMobile}>
+      <StyledMenu show={openMenu}>
         {buttonElements}
       </StyledMenu>
     </>

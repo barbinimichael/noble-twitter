@@ -61,11 +61,15 @@ export const StyledMenu = styled.div`
   top: 5rem;
   right: 0;
   width: 100%;
-  height: ${props => props.show ? (props.isMobile ? '100%' : '50%') : '0%'};
+  height: ${props => props.show ? '100%' : '0%'};
   overflow-y: auto;
   overflow-x: hidden;
   z-index: 10;
   border: solid ${props => props.theme.colors.primary};
   border-width: ${props => props.show ? '2px 0 2px 0' : '0'};
   transition: all 0.5s;
+
+  @media screen and (min-width: ${props => props.theme.breakpoints.sm}) {
+    height: ${props => props.show ? '50%' : '0%'};
+  }
 `;
