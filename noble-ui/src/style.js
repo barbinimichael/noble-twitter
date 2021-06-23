@@ -17,7 +17,7 @@ export const GlobalStyle = createGlobalStyle`
     width: 100%;
     padding: 0 0 0 0;
     margin: 0 0 0 0;
-    font-family: Muli;
+    font-family: Helvetica;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }

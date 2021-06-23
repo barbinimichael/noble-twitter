@@ -10,9 +10,11 @@ export const StyledNavContainer = styled.div`
   align-items: center;
   width: 100%;
   background-color: ${props => props.theme.colors.onPrimary};
+  max-width: 90rem;
+  padding: 0 2.5rem;
+  margin: 1rem auto;
 
   @media screen and (min-width: ${props => props.theme.breakpoints.md}) {
-    padding: 1rem 0.5rem;
   }
 `;
 
@@ -47,6 +49,7 @@ export const StyledTitle = styled.div`
   margin-left: 1rem;
   color: ${props => props.theme.colors.primary};
   white-space: nowrap;
+  font-weight: bold;
 `;
 
 export const StyledNavMenu = styled(Button)`
