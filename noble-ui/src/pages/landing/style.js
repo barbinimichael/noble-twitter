@@ -32,7 +32,7 @@ export const StyledIntroContainer = styled.div`
   width: 100%;
   height: fit-content;
   flex: 1 0 auto;
-  border-radius: 8px;
+  border-radius: 0.5rem;
 
   @media screen and (min-width: ${props => props.theme.breakpoints.md}) {
     grid-template-columns: 1fr 1fr;
@@ -47,7 +47,7 @@ export const StyledTextContainer = styled.div`
 `;
 
 export const StyledTitle = styled.h1`
-  font-size: 2em;
+  font-size: ${props => props.theme.font.h2};
   color: ${props => props.theme.colors.onSecondary};
   font-weight: bold;
 
@@ -72,7 +72,7 @@ export const StyledIntroCreateButton = styled(A)`
   color: ${props => props.theme.colors.onPrimary};
   background: ${props => props.theme.colors.primary};
   margin: 3rem 1rem 0rem 0rem;
-  border-radius: 6px;
+  border-radius: 0.375rem;
 
   @media screen and (min-width: ${props => props.theme.breakpoints.md}) {
     margin: 3rem 1rem 3rem 0rem;
@@ -99,7 +99,7 @@ export const StyledCheckWrapper = styled.div`
 
 export const StyledCheck = styled(CgCheckO)`
   color: ${props => props.theme.colors.primary};
-  margin-right: 0.25rem;
+  margin-right: 1ch;
 `;
 
 export const StyledSubTitleContainer = styled.div`
@@ -146,7 +146,7 @@ export const StyledStepContainer = styled.div`
   @media screen and (min-width: ${props => props.theme.breakpoints.md}) {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    grid-gap: 30px;
+    grid-gap: 2rem;
   }
 `;
 
@@ -213,11 +213,11 @@ export const StyledStartContainer = styled.div`
   background-color: ${props => props.theme.colors.primary};
   width:100%;
   margin-top: 2rem;
-  margin-bottom: 4rem;
+  margin-bottom: 0.25rem;
   padding: 2rem;
   height: fit-content;
   flex: 1 0 auto;
-  border-radius: 8px;
+  border-radius: 0.5rem;
 
   @media screen and (min-width: ${props => props.theme.breakpoints.sm}) {
     border-radius: 1rem;
@@ -243,7 +243,7 @@ export const StyledCreateButton = styled(A)`
   color: ${props => props.theme.colors.primary};
   background: ${props => props.theme.colors.onPrimary};
   margin: 1rem;
-  border-radius: 6px;
+  border-radius: 0.375rem;
   padding: 0.4rem 1.4rem;
 `;
 
@@ -252,6 +252,6 @@ export const StyledCoffeeButton = styled(Button)`
   background: ${props => props.theme.colors.primary};
   border: 2px solid ${props => props.theme.colors.onPrimary};
   margin: 1rem;
-  border-radius: 6px;
+  border-radius: 0.375rem;
   padding: 0.4rem 1.4rem;
 `;

@@ -11,11 +11,8 @@ export const StyledNavContainer = styled.div`
   width: 100%;
   background-color: ${props => props.theme.colors.onPrimary};
   max-width: 90rem;
-  padding: 0 2.5rem;
+  padding: 0 2rem;
   margin: 1rem auto;
-
-  @media screen and (min-width: ${props => props.theme.breakpoints.md}) {
-  }
 `;
 
 export const StyledLogoContainer = styled.a`

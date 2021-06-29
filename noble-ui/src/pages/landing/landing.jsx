@@ -29,7 +29,7 @@ const Landing = () => {
   const checkElements = checks.map(c => (
     <StyledCheckWrapper key={c.key}>
       <StyledCheck />
-      &nbsp;{t(c.key)}
+      {t(c.key)}
     </StyledCheckWrapper>
   ))
 
