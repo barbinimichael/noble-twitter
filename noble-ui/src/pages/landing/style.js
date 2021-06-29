@@ -4,6 +4,7 @@ import A from '../../components/a/a'
 import Button from '../../components/button/button'
 
 export const StyledBody = styled.div`
+  margin: 0 auto;
   display: flex;
   flex-flow: column;
   overflow-y: auto;
@@ -15,9 +16,11 @@ export const StyledContainer = styled.div`
   flex-flow: column;
   align-items: center;
   height: fit-content;
+  max-width: 90rem;
+  padding: 0 2rem;
 
   @media screen and (min-width: ${props => props.theme.breakpoints.sm}) {
-    margin: 0 2.5rem;
+    margin: 0 auto;
   }
 `;
 
@@ -25,17 +28,16 @@ export const StyledIntroContainer = styled.div`
   display: grid;
   grid-template-columns: 1fr;
   background-color: ${props => props.theme.colors.secondary};
-  padding: 1rem 0 1rem 1rem;
+  padding: 3rem 2rem 3rem 2rem;
   width: 100%;
   height: fit-content;
   flex: 1 0 auto;
-
-  @media screen and (min-width: ${props => props.theme.breakpoints.sm}) {
-    border-radius: 1rem;
-  }
+  border-radius: 0.5rem;
 
   @media screen and (min-width: ${props => props.theme.breakpoints.md}) {
     grid-template-columns: 1fr 1fr;
+    padding: 6rem 0 4rem 6rem;
+    border-radius: 1rem;
   }
 `;
 
@@ -45,8 +47,13 @@ export const StyledTextContainer = styled.div`
 `;
 
 export const StyledTitle = styled.h1`
-  font-size: ${props => props.theme.font.h1};
+  font-size: ${props => props.theme.font.h2};
   color: ${props => props.theme.colors.onSecondary};
+  font-weight: bold;
+
+  @media screen and (min-width: ${props => props.theme.breakpoints.md}) {
+    font-size: ${props => props.theme.font.h1};
+  }
 `;
 
 export const StyledImage = styled.img`
@@ -65,6 +72,7 @@ export const StyledIntroCreateButton = styled(A)`
   color: ${props => props.theme.colors.onPrimary};
   background: ${props => props.theme.colors.primary};
   margin: 3rem 1rem 0rem 0rem;
+  border-radius: 0.375rem;
 
   @media screen and (min-width: ${props => props.theme.breakpoints.md}) {
     margin: 3rem 1rem 3rem 0rem;
@@ -91,7 +99,7 @@ export const StyledCheckWrapper = styled.div`
 
 export const StyledCheck = styled(CgCheckO)`
   color: ${props => props.theme.colors.primary};
-  margin-right: 0.25rem;
+  margin-right: 1ch;
 `;
 
 export const StyledSubTitleContainer = styled.div`
@@ -104,7 +112,7 @@ export const StyledSubTitleContainer = styled.div`
   flex: 1 0 auto;
 
   @media screen and (min-width: ${props => props.theme.breakpoints.md}) {
-    padding: 5rem 1rem;
+    padding: 5rem 2.4rem;
   }
 `;
 
@@ -112,6 +120,7 @@ export const StyledSubTitle = styled.h2`
   font-size: ${props => props.theme.font.h2};
   color: ${props => props.theme.colors.onSecondary};
   text-align: center;
+  font-weight: bold;
 
   @media screen and (min-width: ${props => props.theme.breakpoints.sm}) {
     font-size: ${props => props.theme.font.h1};
@@ -137,6 +146,7 @@ export const StyledStepContainer = styled.div`
   @media screen and (min-width: ${props => props.theme.breakpoints.md}) {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
+    grid-gap: 2rem;
   }
 `;
 
@@ -156,8 +166,8 @@ export const StyledStepImageWrapper = styled.div`
   justify-content: center;
   background-color: ${props => props.theme.colors.secondary};
   border-radius: 50%;
-  width: 15rem;
-  height: 15rem;
+  width: 20rem;
+  height: 20rem;
 `;
 
 export const StyledStepImage = styled.img`
@@ -170,6 +180,10 @@ export const StyledStepImage = styled.img`
 export const StyledStepTextWrapper = styled.div`
   display: flex;
   align-items: center;
+
+  @media screen and (min-width: ${props => props.theme.breakpoints.md}) {
+    width: 80%;
+  }
 `;
 
 export const StyledStepNumber = styled(StyledText)`
@@ -178,14 +192,18 @@ export const StyledStepNumber = styled(StyledText)`
   justify-content: center;
   width: 3rem;
   height: 3rem;
-  border: 2px solid ${props => props.theme.colors.onSecondary};
+  border: 3px solid ${props => props.theme.colors.onSecondary};
   border-radius: 50%;
   flex: 1 0 auto;
+  margin-right: 0.8rem;
+  font-weight: bold;
 `;
 
 export const StyledStepText = styled(StyledText)`
   text-align: unset;
   padding-left: 0.25rem;
+  font-weight: bold;
+  line-height: 1.6rem;
 `
 
 export const StyledStartContainer = styled.div`
@@ -195,9 +213,11 @@ export const StyledStartContainer = styled.div`
   background-color: ${props => props.theme.colors.primary};
   width:100%;
   margin-top: 2rem;
+  margin-bottom: 0.25rem;
   padding: 2rem;
   height: fit-content;
   flex: 1 0 auto;
+  border-radius: 0.5rem;
 
   @media screen and (min-width: ${props => props.theme.breakpoints.sm}) {
     border-radius: 1rem;
@@ -206,7 +226,8 @@ export const StyledStartContainer = styled.div`
 
 export const StyledStartTitle = styled(StyledSubTitle)`
   color: ${props => props.theme.colors.onPrimary};
-  padding: 1rem 0;
+  padding: 1rem 0 0.4rem;
+  font-weight: bold;
 `;
 
 export const StyledStartButtonContainer = styled.div`
@@ -222,6 +243,8 @@ export const StyledCreateButton = styled(A)`
   color: ${props => props.theme.colors.primary};
   background: ${props => props.theme.colors.onPrimary};
   margin: 1rem;
+  border-radius: 0.375rem;
+  padding: 0.4rem 1.4rem;
 `;
 
 export const StyledCoffeeButton = styled(Button)`
@@ -229,4 +252,6 @@ export const StyledCoffeeButton = styled(Button)`
   background: ${props => props.theme.colors.primary};
   border: 2px solid ${props => props.theme.colors.onPrimary};
   margin: 1rem;
+  border-radius: 0.375rem;
+  padding: 0.4rem 1.4rem;
 `;
