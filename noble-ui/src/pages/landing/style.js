@@ -9,6 +9,7 @@ export const StyledBody = styled.div`
   flex-flow: column;
   overflow-y: auto;
   height: 100%;
+  width: 100%;
 `;
 
 export const StyledContainer = styled.div`
@@ -28,9 +29,8 @@ export const StyledIntroContainer = styled.div`
   display: grid;
   grid-template-columns: 1fr;
   background-color: ${props => props.theme.colors.secondary};
-  padding: 3rem 2rem 3rem 2rem;
+  padding: 2rem;
   width: 100%;
-  height: fit-content;
   flex: 1 0 auto;
   border-radius: 0.5rem;
 
@@ -157,7 +157,7 @@ export const StyledStepWrapper = styled.div`
   margin-bottom: 1rem;
   height: fit-content;
   flex: 1 0 auto;
-  margin-left: 0.25rem;
+  margin-left: 1rem;
 `;
 
 export const StyledStepImageWrapper = styled.div`
@@ -166,8 +166,14 @@ export const StyledStepImageWrapper = styled.div`
   justify-content: center;
   background-color: ${props => props.theme.colors.secondary};
   border-radius: 50%;
-  width: 20rem;
-  height: 20rem;
+  width: 15rem;
+  height: 15rem;
+  flex: 0 0 auto;
+
+  @media screen and (min-width: ${props => props.theme.breakpoints.sm}) {
+    width: 20rem;
+    height: 20rem;
+  }
 `;
 
 export const StyledStepImage = styled.img`

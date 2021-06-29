@@ -12,7 +12,7 @@ export const StyledNavContainer = styled.div`
   background-color: ${props => props.theme.colors.onPrimary};
   max-width: 90rem;
   padding: 0 2rem;
-  margin: 1rem auto;
+  margin: 0 auto 1rem auto;
 `;
 
 export const StyledLogoContainer = styled.a`
@@ -54,6 +54,7 @@ export const StyledNavMenu = styled(Button)`
   color: ${props => props.theme.colors.primary};
   background-color: ${props => props.theme.colors.onPrimary};
   border: none;
+  padding: 0 0 0 0.5rem;
 `;
 
 export const StyledMenu = styled.div`

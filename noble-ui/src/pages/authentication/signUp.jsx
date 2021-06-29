@@ -1,8 +1,7 @@
 import React from 'react'
 import { useTranslation } from 'react-i18next'
-import { FcGoogle } from 'react-icons/fc'
 import NavBar from '../../components/navBar/navBar'
-import { StyledContainer, StyledTitle, StyledText, StyledLink, StyledSignUpButton, StyledWrapper } from './style'
+import { StyledContainer, StyledTitle, StyledLink, StyledSignUpButton, StyledBody } from './style'
 
 const SignUp = () => {
   const { t } = useTranslation()
@@ -13,17 +12,14 @@ const SignUp = () => {
   }
 
   return (
-    <>
+    <StyledBody>
       <NavBar elements={elements} />
       <StyledContainer>
-        <StyledWrapper>
-          <StyledTitle>{t('authentication.signUp')}</StyledTitle>
-          <StyledText>{t('authentication.signUpDescription')}</StyledText>
-          <StyledSignUpButton onClick={handleSignUp}><FcGoogle /></StyledSignUpButton>
-        </StyledWrapper>
+        <StyledTitle>{t('authentication.signUp')}</StyledTitle>
+        <StyledSignUpButton onClick={handleSignUp}>{t('authentication.signUpGoogle')}</StyledSignUpButton>
         <StyledLink href='/login'>{t('authentication.alreadyHaveAccount')}</StyledLink>
       </StyledContainer>
-    </>
+    </StyledBody>
   )
 }
 

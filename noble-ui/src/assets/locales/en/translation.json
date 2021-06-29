@@ -28,10 +28,12 @@
   },
   "authentication": {
     "signUp": "Sign up for No Bull Twitter",
+    "signUpGoogle": "Sign up with Google",
     "signUpDescription": "Sign up using your Google account",
     "earlyAccess": "Sign up to get early access to the No Bull Twitter beta",
     "earlyAccessThankYou": "Thank you for signing up! We'll email you when it's open!",
     "login": "Login to No Bull Twitter",
+    "loginGoogle": "Login with Google",
     "loginDescription": "Login using your Google account",
     "alreadyHaveAccount": "Already have an account? Login here.",
     "doNotHaveAccount": "Don't have an account? Sign up here."

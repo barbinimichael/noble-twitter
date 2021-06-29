@@ -37,7 +37,6 @@ const NavBar = ({ elements, className }) => {
     } else {
       setButtonX(1)
     }
-
   }, [windowWidth])
 
   const handleBound = (ref, bound, setBound) => {
@@ -70,7 +69,7 @@ const NavBar = ({ elements, className }) => {
         <StyledButtonContainer ref={buttonRef} show={!buttonX}>
           {buttonElements}
         </StyledButtonContainer>
-        {buttonX && (
+        {(buttonX && elements?.length > 0) && (
           <StyledNavMenu onClick={() => setOpenMenu(o => !o)}>
             <AiOutlineMenu />
           </StyledNavMenu>
