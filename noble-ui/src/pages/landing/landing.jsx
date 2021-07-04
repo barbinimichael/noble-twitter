@@ -6,7 +6,7 @@ import {
   StyledCheckContainer, StyledCheckWrapper, StyledCheck, StyledSubTitleContainer, StyledSubTitle, StyledStepContainer,
   StyledStepWrapper, StyledStepImage, StyledStartContainer, StyledStartButtonContainer, StyledCreateButton,
   StyledCoffeeButton, StyledStartTitle, StyledStepImageWrapper, StyledStepText, StyledStepNumber, StyledStepTextWrapper,
-  StyledIntroCreateButton
+  StyledIntroCreateButton, StyledClose
 } from './style'
 import desktopIcon from '../../assets/icons/desktop.svg'
 import createIcon from '../../assets/icons/create.svg'
@@ -22,13 +22,13 @@ const Landing = () => {
   ]
 
   const checks = [
-    { key: 'landing.checkBoxes.distractionFree' }, { key: 'landing.checkBoxes.personalizedContent' },
-    { key: 'landing.checkBoxes.allInOne' }
+    { key: 'landing.checkBoxes.dailyUpdates' }, { key: 'landing.checkBoxes.allTweets' },
+    { key: 'landing.checkBoxes.noExtra', x: true }
   ]
 
   const checkElements = checks.map(c => (
     <StyledCheckWrapper key={c.key}>
-      <StyledCheck />
+      {c.x ? <StyledClose /> : <StyledCheck />}
       {t(c.key)}
     </StyledCheckWrapper>
   ))

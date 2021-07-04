@@ -66,9 +66,11 @@ const NavBar = ({ elements, className }) => {
             {t('title')}
           </StyledTitle>
         </StyledLogoContainer>
-        <StyledButtonContainer ref={buttonRef} show={!buttonX}>
-          {buttonElements}
-        </StyledButtonContainer>
+        {(!buttonX && elements?.length > 0) && (
+          <StyledButtonContainer ref={buttonRef}>
+            {buttonElements}
+          </StyledButtonContainer>
+        )}
         {(buttonX && elements?.length > 0) && (
           <StyledNavMenu onClick={() => setOpenMenu(o => !o)}>
             <AiOutlineMenu />

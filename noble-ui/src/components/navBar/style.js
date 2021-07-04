@@ -12,7 +12,7 @@ export const StyledNavContainer = styled.div`
   background-color: ${props => props.theme.colors.onPrimary};
   max-width: 90rem;
   padding: 0 2rem;
-  margin: 0 auto 1rem auto;
+  margin: 1rem auto;
 `;
 
 export const StyledLogoContainer = styled.a`
@@ -31,7 +31,7 @@ export const StyledLogoContainer = styled.a`
 `;
 
 export const StyledButtonContainer = styled.div`
-  display: ${props => props.show ? 'flex' : 'none'};
+  display: flex;
   flex-wrap: nowrap;
   margin-left: auto;
 `;

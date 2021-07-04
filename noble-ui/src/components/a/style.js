@@ -18,6 +18,6 @@ export const StyledA = styled.a`
   text-decoration: unset;
 
   :hover {
-    transform: scale(1.05);
+    transform: scale(1.02);
   }
 `;

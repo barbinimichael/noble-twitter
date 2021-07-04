@@ -7,7 +7,7 @@ import clone from 'lodash/clone'
 import {
   StyledBody, StyledContainer, StyledFormContainer, StyledForm, StyledFollowingContainer,
   StyledFollowWrapper, StyledFollowText, StyledRemoveButton, StyledTitle, StyledSubTitle, StyledTitleContainer,
-  StyledAddWrapper, StyledAddButton, StyledAddIcon, StyledError
+  StyledAddWrapper, StyledAddButton, StyledAddIcon, StyledError, StyledNote
 } from './style'
 
 const FOLLOW_LIMIT = 3;
@@ -32,7 +32,6 @@ const Profile = () => {
       })
         .then((response) => {
           if (!response.data?.error) {
-            console.log('found user')
             setValidUsername(true)
             api({
               method: 'put',
@@ -106,6 +105,7 @@ const Profile = () => {
         <StyledTitleContainer>
           <StyledTitle>{t('profile.title')}</StyledTitle>
           <StyledSubTitle>{t('profile.followAccount')}</StyledSubTitle>
+          <StyledNote>{t('profile.followNote')}</StyledNote>
         </StyledTitleContainer>
         <StyledFormContainer>
           <StyledForm
@@ -120,6 +120,7 @@ const Profile = () => {
         {!validUsername && <StyledError>{t('profile.notFoundError')}</StyledError>}
         {reachedLimit && <StyledError>{t('profile.reachedLimit')}</StyledError>}
         <StyledSubTitle>{t('profile.following')}</StyledSubTitle>
+        <StyledNote>{t('profile.followingNote')}</StyledNote>
         <StyledFollowingContainer>
           {following.map((f, i) => (
             <StyledFollowWrapper key={i}>

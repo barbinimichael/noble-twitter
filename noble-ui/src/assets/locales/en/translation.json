@@ -9,11 +9,13 @@
   "landing": {
     "title": "The Bull-Free Twitter experience you always wanted",
     "subTitle": "A new way to Twitter",
-    "description": "Get a daily newsletter compiled from the Twitter accounts you care about most. Customize your report to show only the most popular Tweets in chronological order. All in a fast and easy format to digest, delivered straight to your inbox.",
+    "description": "Get a daily update for the Twitter accounts you care about. You see every tweet just like on Twitter, but without any of the ads, retweets, or likes that get in the way of your experience. All of this in a fast and easy to digest format, delivered straight to your inbox.",
     "checkBoxes": {
       "distractionFree": "Distraction Free",
       "personalizedContent": "Personalized Content",
-      "allInOne": "All in One Account"
+      "dailyUpdates": "Daily Updates",
+      "allTweets": "Every Tweet You Would See on Twitter",
+      "noExtra": "No Ads, Retweets, or Likes"
     },
     "steps": {
       "create": "Create a free No Bull Twitter Account",
@@ -42,8 +44,10 @@
     "title": "Your Profile",
     "followAccount": "Add a Twitter Account",
     "follow": "Follow",
+    "followNote": "Type in the username of the Twitter account you would like to follow",
     "inputPlaceholder": "Enter username...",
     "following": "Subscribed Accounts",
+    "followingNote": "Your daily update will have tweets from all the following accounts",
     "notFoundError": "Account does not exist",
     "reachedLimit": "You have reached the limit for accounts you can subscribe to"
   }

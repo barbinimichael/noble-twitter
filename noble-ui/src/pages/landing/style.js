@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { CgCheckO } from 'react-icons/cg'
+import { CgCheckO, CgCloseO } from 'react-icons/cg'
 import A from '../../components/a/a'
 import Button from '../../components/button/button'
 
@@ -97,9 +97,16 @@ export const StyledCheckWrapper = styled.div`
   }
 `;
 
+export const StyledClose = styled(CgCloseO)`
+  color: ${props => props.theme.colors.primary};
+  margin-right: 1ch;
+  flex: 0 0 auto;
+`;
+
 export const StyledCheck = styled(CgCheckO)`
   color: ${props => props.theme.colors.primary};
   margin-right: 1ch;
+  flex: 0 0 auto;
 `;
 
 export const StyledSubTitleContainer = styled.div`

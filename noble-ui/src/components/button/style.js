@@ -13,7 +13,7 @@ export const StyledButton = styled.button`
   user-select: none;
 
   :hover {
-    transform: scale(1.05);
+    transform: scale(1.02);
   }
 
   :disabled {
