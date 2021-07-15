@@ -1,6 +1,6 @@
 const Twitter = require('twitter-lite');
 const axios = require('axios')
-const createReport = require('./createReport/createReport')
+const { createReport, htmlWrapper } = require('./createReport/createReport')
 var aws = require("aws-sdk");
 var ses = new aws.SES({ region: "us-east-2" });
 require('dotenv').config()
@@ -76,7 +76,6 @@ const getTwitterJSON = async (client, username, date) => {
       'tweet.fields': 'conversation_id,attachments,entities,created_at'
     };
     return client.get('tweets/search/recent', parameters).then(q => {
-      console.log(q?.meta?.result_count)
       return q
     })
       .catch(e => {
@@ -114,14 +113,14 @@ exports.handler = async (event, context) => {
   users.forEach(u => {
     u?.following?.forEach(f => twitterAccounts.add(f))
   })
-  console.log(twitterAccounts)
 
   const client = await getTwitterClient()
 
   // create reports
   const reports = {}
   const date = getDate()
-  console.log(date)
+  const formatDate = (date.getMonth() + 1) + '/' + date.getDate() + '/' + date.getFullYear();
+  console.log(formatDate)
 
   const reportPromises = Array.from(twitterAccounts).map(async t => {
     const username = t
@@ -138,11 +137,10 @@ exports.handler = async (event, context) => {
       json.data[i].subThreads = q
     })
 
-    const report = createReport(json, username, date)
+    const report = createReport(json, username)
     reports[username] = report
   })
   await Promise.all(reportPromises)
-  console.log(reports)
 
   // send users the reports they asked for
   const sendPromises = users.map(u => {
@@ -162,7 +160,7 @@ exports.handler = async (event, context) => {
         Body: {
           Html: {
             Charset: "UTF-8",
-            Data: briefing
+            Data: htmlWrapper(briefing, formatDate)
           }
         },
         Subject: {
@@ -170,10 +168,9 @@ exports.handler = async (event, context) => {
           Data: "Test Email"
         },
       },
-      Source: "NoBullBriefing@nobulltwitter.com",
+      Source: "NoBullUpdate@nobulltwitter.com",
     };
 
-    console.log('sending email');
     return ses.sendEmail(params).promise();
   })
   return Promise.all(sendPromises);

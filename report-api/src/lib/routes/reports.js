@@ -2,6 +2,7 @@ const express = require('express')
 const TwitterAccount = require('../schema/twitterAccount')
 const Report = require('../schema/report')
 const { ReportType, Errors } = require('../enums')
+const picture = require('../images/nobull-logo.png')
 
 const router = express.Router()
 
@@ -31,6 +32,9 @@ router.get('/:accountName/:date/summary', (req, res) => {
   getReport(req, res, ReportType.SUMMARY)
 })
 
+app.get('/picture', function (req, res) {
+  res.sendFile(picture);
+});
 
 router.post('/', (req, res) => {
   const { accountName, reports } = req.body

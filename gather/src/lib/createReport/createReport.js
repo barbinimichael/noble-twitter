@@ -1,7 +1,7 @@
-const createReport = (request, accountName, date, isSubThread) => {
+const createReport = (request, accountName, isSubThread) => {
 
   const { data, includes, meta } = request || {}
-  if (!data || data?.length === 0) return;
+  if (!data || data?.length === 0) return '';
 
   data.reverse()
   const tweetElements = data?.map(tweet => {
@@ -61,7 +61,7 @@ const createReport = (request, accountName, date, isSubThread) => {
         isPM ? 'PM' : 'AM'
       )
 
-    const subElements = subThreads ? createReport(subThreads, accountName, date, true) : ''
+    const subElements = subThreads ? createReport(subThreads, accountName, true) : ''
     return (
       isSubThread ? `
       <div class='subThread'>
@@ -70,8 +70,13 @@ const createReport = (request, accountName, date, isSubThread) => {
       ` :
         `
       <div class='tweet'>
-        <h3>${time}${subThreads?.data?.length > 0 ? ' (Thread)' : ''}</h3>
-        ${html}
+        ${subThreads?.data?.length > 0 ? `
+          <h3 class='thread'>${time}: A Thread</h3>
+          <div class='subThread'>${html}</div>
+        ` : `
+          <h3 class='time'>${time}:&nbsp;</h3>
+          ${html}
+        `}
         ${subElements}
       </div>
       `
@@ -85,52 +90,76 @@ const createReport = (request, accountName, date, isSubThread) => {
   return (
     isSubThread ? concatTweets :
       `
-      <!DOCTYPE html>
-      <html>
-        <head>
-          <meta charset="UTF-8" />
-          <style>
-            body {
-              font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-              background-color: #ede6ff;
-              padding: 0 1rem;
-            }
-            h2, h3 {
-              margin: 0;
-            }
-            img {
-              width: 15rem;
-              height: 15rem;
-              object-fit: cover;
-            }
-            a, p {
-              display: inline;
-            }
-            .imageContainer {
-              display: flex;
-              width: 100%;
-              overflow-x: auto;
-            }
-            .tweet {
-              margin: 1rem 0;
-            }
-            .subThread {
-              margin: 1rem 0 0 1rem;
-              border-left: 0.25rem solid black;
-              padding-left: 1rem;
-            }
-          </style>
-        </head>
-        <body>
-          <h1 class="title">
-            Your Twitter Briefing for ${date}
-          </h1>
-          <h2>${accountName}</h2>
-          ${concatTweets}
-        </body>
-      </html>
-    `
+        <h2>${accountName}</h2>
+        ${concatTweets}
+      `
   )
 }
 
-module.exports = createReport
+const htmlWrapper = (date, content) => `
+  <!DOCTYPE html>
+  <html>
+    <head>
+      <meta charset="UTF-8" />
+      <style>
+        .background {
+          font-family: Helvetica;
+          background-color: #ede6ff;
+          padding: 2rem 1rem;
+          border-radius: 0.5rem;   
+        }
+        h1 {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin: 0.5rem 0;
+        }
+        .title {
+          text-decoration: underline;
+        }
+        h2, h3 {
+          margin: 0;
+        }
+        .time {
+          display: inline;
+        }
+        .time-thread {
+          display: flex;
+          justify-content: center;
+        }
+        .thread {
+        }
+        img {
+          width: 15rem;
+          height: 15rem;
+          object-fit: cover;
+        }
+        a, p {
+          display: inline;
+        }
+        .imageContainer {
+          display: flex;
+          width: 100%;
+          overflow-x: auto;
+        }
+        .tweet {
+          margin: 3rem 0;
+        }
+        .subThread {
+          margin-top: 1rem;
+          border-left: 2px solid black;
+          padding-left: 1rem;
+        }
+      </style>
+    </head>
+    <body>
+      <div class='background'>
+        <h1 class="title">Your Nobull Update</h1>
+        <h1>${date}</h1>
+        ${content}
+      </div>
+    </body>
+  </html>
+`
+
+module.exports = { createReport, htmlWrapper }

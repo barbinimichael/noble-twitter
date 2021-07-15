@@ -6,6 +6,7 @@ const cookieSession = require('cookie-session');
 const passport = require('passport');
 const reportsRouter = require('./routes/reports')
 const usersRouter = require('./routes/users')
+const imagesRouter = require('./routes/images')
 const authenticateToken = require('./middleWare/authenticateToken')
 const authRouter = require('./routes/auth')
 const twitter = require('twitter-lite');
@@ -64,6 +65,7 @@ const user = new twitter({
 app.use('/reports', authenticateToken, reportsRouter)
 app.use('/users', authenticateToken, usersRouter)
 app.use('/auth', authRouter)
+app.use('/images', imagesRouter)
 
 app.get('/', (req, res) => {
   res.send('Noble Twitter API')
