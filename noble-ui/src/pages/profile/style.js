@@ -14,27 +14,30 @@ export const StyledBody = styled.div`
 export const StyledContainer = styled.div`
   display: flex;
   flex-flow: column;
-  flex: 1 0 auto;
+  flex: 0 0 auto;
   margin: 0rem 0.5rem 1rem 1rem;
   padding-left: 1rem;
   background-color: ${props => props.theme.colors.secondary};
   border-radius: 1rem;
   padding: 0.5rem;
   height: fit-content;
+  width: calc(100% - 1.5rem);
+  box-sizing: border-box;
 
   @media screen and (min-width: ${props => props.theme.breakpoints.md}) {
-    width: 75%;
+    width: calc(100% - 6rem);
+    box-sizing: border-box;
     padding: 4rem 0 4rem 6rem;
     margin: 1rem 0.5rem 1rem 2rem;
   }
 `;
 
 export const StyledTitleContainer = styled.div`
-  flex: 1 0 auto;
+  flex: 0 0 auto;
 `;
 
 export const StyledTitle = styled.div`
-  flex: 1 0 auto;
+  flex: 0 0 auto;
   font-size: ${props => props.theme.font.h1};
   color: ${props => props.theme.colors.onSecondary};
   font-weight: bold;
@@ -43,7 +46,7 @@ export const StyledTitle = styled.div`
 `;
 
 export const StyledSubTitle = styled.div`
-  flex: 1 0 auto;
+  flex: 0 0 auto;
   font-size: ${props => props.theme.font.h2};
   color: ${props => props.theme.colors.onSecondary};
   font-weight: 500;
@@ -83,7 +86,7 @@ export const StyledAddIcon = styled(MdPersonAdd)`
 `;
 
 export const StyledFollowingContainer = styled.div`
-  flex: 1 0 auto;
+  flex: 0 0 auto;
 `;
 
 export const StyledFollowWrapper = styled.div`
@@ -107,6 +110,7 @@ export const StyledFollowText = styled.div`
 `;
 
 export const StyledRemoveButton = styled(Button)`
+  flex: 0 0 auto;
   margin: 0 0.5rem;
   :hover {
     transform: unset;

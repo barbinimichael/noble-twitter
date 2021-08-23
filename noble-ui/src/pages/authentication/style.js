@@ -42,7 +42,7 @@ export const StyledBody = styled.div`
 `;
 
 export const StyledContainer = styled.div`
-  flex: 1 0 auto;
+  flex: 0 0 auto;
   display: flex;
   flex-flow: column;
   align-items: center;
@@ -81,10 +81,9 @@ export const StyledTitle = styled.div`
 
 export const StyledLink = styled(A)`
   height: fit-content;
-  flex: 1 0 auto;
+  flex: 0 0 auto;
   color: ${props => props.theme.colors.onSecondary};
   text-decoration: underline;
-  flex: 1 0 auto;
   white-space: normal;
   text-align: center;
   margin: 1rem;
@@ -101,13 +100,14 @@ export const StyledSignUpButton = styled(Button)`
   color: ${props => props.theme.colors.onPrimary};
   border-radius: 0.375rem;
   font-size: ${props => props.theme.font.body};
-  flex: 1 0 auto;
-  white-space: wrap;
+  flex: 0 0 auto;
+  white-space: normal;
   svg {
     width: 1.75rem;
     height: 1.75rem;
     margin-right: 0.5rem;
     background-color: ${props => props.theme.colors.onPrimary};
     border-radius: 50%;
+    flex: 0 0 auto;
   }
 `;
